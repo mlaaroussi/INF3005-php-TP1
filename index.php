@@ -31,7 +31,7 @@
                 <figcaption> Veuillez choisir un modèle de cadre.</figcaption>
             </figure>
 
-            <form oninput="ht.value=rangeH.value; lr.value=rangeL.value; pf.value=parseInt(rangeP.value)/20;">
+            <form id="formPrincipal" enctype="multipart/form-data" oninput="ht.value=rangeH.value; lr.value=rangeL.value; pf.value=parseInt(rangeP.value)/20;">
                 <article id="choix">
                     <h2>2.Adapter votre choix :</h2>
                     <label for="cadre-choisi" >Cadre choisi:</label>  <img id="img-choisi" src="" width="32" height="32" >
@@ -53,25 +53,21 @@
                     <label for="couleur" >Couleur: </label>
                     <input type="color" name="couleur"/>
                 </article>
-
+                
                 <aside id="upload">
+                     <h2> Résultat de l'ecadrement ...</h2>                                    
+                    <img id="rslt-photo" src="" width="200" height="100" >                                    
+                </aside>
+
+                <aside id="choix-fichier">
                     <h2>3.Fournir un fichier contenant votre photo</h2>
-                    <input type="file" accept="image/*"/>
+                    <input type="file" name="file" id="file" accept="image/*" required />              
                     <br/>
-                    <input type="submit" value="visualiser"/>
-                </aside>
-                <aside id="upload">
-                     <h2>4.Résultat de l'ecadrement ...</h2>                                    
-                    <img id="rslt-photo" src="img/marrakech.jpg" width="700" height="100" >                                    
-                </aside>
-               
-            </form>
-            <article>
-                <h2>un titre</h2>
-                <p>Duis egestas tristique justo sed tincidunt. Sed sed tortor eget urna mattis vehicula. Nunc in gravida libero. Integer rutrum tortor ac mattis facilisis
-                </p>
-            </article>
-
+                    <input type="submit" value="Produire facture"/>
+                    <h4 id="chargement" >Chargement..</h4>
+                    <div id="message"></div>
+                </aside>                               
+            </form>           
         </section>
 
         <footer>
