@@ -119,9 +119,6 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 }
 
 #chargement {
-    display:none;
-    position:absolute;
-    top:50px;
-    left:850px;
-    font-size:25px;
+    display:none; 
+  
 }

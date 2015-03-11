@@ -53,8 +53,9 @@
                 </article>
                 
                 <aside id="upload">
-                     <h2> Résultat de l'ecadrement ...</h2>                                    
-                    <img id="rslt-photo" src="img/no-image.jpg" width="200" height="100" >                                    
+                    <h2> Résultat de l'ecadrement <img id="chargement" src="img/chargement.gif" width="22" height="22" ></h2>                                    
+                    <img id="rslt-photo" src="img/no-image.jpg" width="200" height="100" > 
+                     
                 </aside>
 
                 <aside id="choix-fichier">
@@ -62,7 +63,7 @@
                     <input type="file" name="file" id="file" accept="image/*" required />              
                     <br/>
                     <input type="submit" value="Produire facture"/>
-                    <h4 id="chargement" >Chargement..</h4>
+                  
                     <div id="message"></div>
                 </aside>                               
             </form>           
