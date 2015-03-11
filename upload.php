@@ -8,10 +8,10 @@ if (isset($_FILES["file"]["type"])) {
             ) && ($_FILES["file"]["size"] < 10000000)// fichiers inférieurs a 10Mo peuvent être téléchargés.
             && in_array($file_extension, $validextensions)) {
         if ($_FILES["file"]["error"] > 0) {
-            echo "Return Code: " . $_FILES["file"]["error"] . "<br/><br/>";
+            echo "Code d'erreur: " . $_FILES["file"]["error"] . "<br/><br/>";
         } else {
             if (file_exists("upload/" . $_FILES["file"]["name"])) {
-                echo $_FILES["file"]["name"] . " <span id='invalid'><b>already exists.</b></span> ";
+                echo $_FILES["file"]["name"] . " <span id='erreur'><b>Fichier existe déjà.</b></span> ";
             } else {
                 $sourcePath = $_FILES['file']['tmp_name']; // variable pour stocker le chemin du fichier source
                 $targetPath = "upload/" . $_FILES['file']['name']; // variable pour stocker le chemin ou le fichier est stocké
@@ -21,7 +21,6 @@ if (isset($_FILES["file"]["type"])) {
             }
         }
     } else {
-        echo "<span id='erreur'> Taille ou type de fichier non valide<span>";
+        echo "<span id='erreur'> Taille ou type de fichier non valide, seulement les images de taille inférieur à 10Mo sont acceptées <span>";
     }
 }
-?>

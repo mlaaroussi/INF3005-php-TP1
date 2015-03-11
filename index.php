@@ -33,10 +33,8 @@
 
             <form id="formPrincipal" enctype="multipart/form-data" oninput="ht.value=rangeH.value; lr.value=rangeL.value; pf.value=parseInt(rangeP.value)/20;">
                 <article id="choix">
-                    <h2>2.Adapter votre choix :</h2>
-                    <label for="cadre-choisi" >Cadre choisi:</label>  <img id="img-choisi" src="" width="32" height="32" >
+                    <h2>2.Adapter votre choix :</h2>                    
                     <input type="hidden" id="cadre-choisi" name="cadre-choisi" >
-                    <br/>
                     <h3>Dimensions :</h3>
                     <label for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
                     <input type="range" id="rangeH" value="20">
@@ -56,7 +54,7 @@
                 
                 <aside id="upload">
                      <h2> Résultat de l'ecadrement ...</h2>                                    
-                    <img id="rslt-photo" src="" width="200" height="100" >                                    
+                    <img id="rslt-photo" src="img/no-image.jpg" width="200" height="100" >                                    
                 </aside>
 
                 <aside id="choix-fichier">
