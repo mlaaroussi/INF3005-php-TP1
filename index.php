@@ -19,30 +19,30 @@
         <section>
             <h2>1.Modèles de cadres: </h2>
             <figure>
-                <a href=""> <img id="cadre1" src="img/cadre1.jpg" alt="cadre 1" width="115" height="115" > </a> 
-                <a href=""> <img id="cadre2" src="img/cadre2.jpg"alt="cadre 2" width="115" height="115"> </a>
-                <a href=""> <img id="cadre3" src="img/cadre3.jpg"alt="cadre 3" width="115" height="115"> </a>  
-                <a href=""> <img id="cadre4" src="img/cadre4.jpg" alt="cadre 4" width="115" height="115" > </a> 
-                <a href=""> <img id="cadre5" src="img/cadre5.jpg"alt="cadre 5" width="115" height="115"> </a> 
-                <a href=""> <img id="cadre6" src="img/cadre6.jpg"alt="cadre 6" width="115" height="115"> </a>
-                <a href=""> <img id="cadre7" src="img/cadre7.jpg" alt="cadre 7" width="115" height="115" > </a> 
-                <a href=""> <img id="cadre8" src="img/cadre8.jpg"alt="cadre 8" width="115" height="115" > </a>   
-                <a href=""> <img id="cadre9" src="img/cadre9.jpg"alt="cadre 9" width="115" height="115" > </a>   
+                <a href=""> <img id="cadre1" src="img/cadre1.jpg" alt="cadre 1" width="80" height="80" > </a> 
+                <a href=""> <img id="cadre2" src="img/cadre2.jpg"alt="cadre 2" width="80" height="80"> </a>
+                <a href=""> <img id="cadre3" src="img/cadre3.jpg"alt="cadre 3" width="80" height="80"> </a>  
+                <a href=""> <img id="cadre4" src="img/cadre4.jpg" alt="cadre 4" width="80" height="80" > </a> 
+                <a href=""> <img id="cadre5" src="img/cadre5.jpg"alt="cadre 5" width="80" height="80"> </a> 
+                <a href=""> <img id="cadre6" src="img/cadre6.jpg"alt="cadre 6" width="80" height="80"> </a>
+                <a href=""> <img id="cadre7" src="img/cadre7.jpg" alt="cadre 7" width="80" height="80" > </a> 
+                <a href=""> <img id="cadre8" src="img/cadre8.jpg"alt="cadre 8" width="80" height="80" > </a>   
+                <a href=""> <img id="cadre9" src="img/cadre9.jpg"alt="cadre 9" width="80" height="80" > </a>   
                 <figcaption> Veuillez choisir un modèle de cadre.</figcaption>
             </figure>
 
-            <form id="formPrincipal" enctype="multipart/form-data" oninput="ht.value=rangeH.value; lr.value=rangeL.value; pf.value=parseInt(rangeP.value)/20;">
-                <article id="choix">
+            <form id="formPrincipal">
+                <article id="choix-criteres">
                     <h2>2.Adapter votre choix :</h2>                    
                     <input type="hidden" id="cadre-choisi" name="cadre-choisi" >
                     <h3>Dimensions :</h3>
                     <label for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
-                    <input type="range" id="rangeH" value="20">
-                    <input type="text" name="hauteur" id="ht" value="20">
+                    <input type="range" id="rangeH" value="50">
+                    <input type="text" name="hauteur" id="ht" value="50">
                     <br/>
                     <label for="rangeL" >Largeur: <span class="normal">(max. 100cm)</span> </label> 
-                    <input type="range" id="rangeL" value="20">
-                    <input type="text" name="largeur" id="lr" value="20">
+                    <input type="range" id="rangeL" value="50">
+                    <input type="text" name="largeur" id="lr" value="50">
                     <br/>
                     <label for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
                     <input type="range" id="rangeP" value="40">
@@ -50,17 +50,17 @@
                     <br/>
                     <label for="couleur" >Couleur: </label>
                     <input type="color" name="couleur"/>
+                   
                 </article>
                 
-                <aside id="upload">
+                <aside id="affichageRslt">
                     <h2> Résultat de l'ecadrement <img id="chargement" src="img/chargement.gif" width="22" height="22" ></h2>                                    
-                    <img id="rslt-photo" src="img/no-image.jpg" width="200" height="100" > 
-                     
+                    <img id="imgRslt" src="img/no-image.jpg" width="200" height="200" >                      
                 </aside>
 
                 <aside id="choix-fichier">
                     <h2>3.Fournir un fichier contenant votre photo</h2>
-                    <input type="file" name="file" id="file" accept="image/*" required />              
+                    <input type="file" name="file" id="fichierImg" accept="image/*" required />              
                     <br/>
                     <input type="submit" value="Produire facture"/>
                   

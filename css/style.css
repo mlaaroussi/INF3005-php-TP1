@@ -18,28 +18,31 @@ header, section, article, footer, aside {
 h1 {
     color: #38477E;
     font-weight: bolder;
+     font-size: 16px;
 }
 
 h2 {
     color: #38477E;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bolder;
 }
 
 h3 {
     color: #0087e5;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 }
 
-#choix {
-    display:inline-block; 
-    width: 32%;
+#choix-criteres {
+    display:inline-block;   
+    width: 500px;
+    margin-left: 130px;
 }
 
-#upload {
+#affichageRslt {
     display: inline-block;
-    width: 55%;
+    width: 400px;
+    margin-left: 50px;
 }
 
 #affichage {
@@ -48,9 +51,10 @@ h3 {
 }
 
 figure {
-    padding:10px;
-    background:white;
+    padding:10px;    
     border: 1px solid gray;
+    width: 845px;
+    margin: auto;
 }
 
 figcaption {
@@ -104,10 +108,17 @@ input[type="submit"]:hover,input[type="reset"]:hover {
     background-color: #9999ff;
 }
 
-#rslt-photo {
+#imgRslt {
     border-style: solid;
     border-width: 60px 60px;  /* Largeur du cadre */
     border-image: url('../img/ccadre3.jpg') 140 140 round ;/*Largeur du marge, max 210 */
+}
+
+#choix-fichier {
+    padding:10px;    
+    border: 1px solid gray;
+    width: 600px;
+    margin: auto;
 }
 
 #success {
