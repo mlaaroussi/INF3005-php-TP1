@@ -9,16 +9,21 @@ body {
     color: #464646;	
 }
 
-header, section, article, footer, aside {
+header, article, footer, aside {
     border:1px solid grey;
     margin:5px;
     padding:8px;
 }
 
+section {    
+    margin:10px;
+    padding:10px;
+}
+
 h1 {
     color: #38477E;
     font-weight: bolder;
-     font-size: 16px;
+    font-size: 16px;
 }
 
 h2 {
@@ -33,21 +38,40 @@ h3 {
     font-weight: bold;
 }
 
-#choix-criteres {
-    display:inline-block;   
-    width: 500px;
-    margin-left: 130px;
+#choixCriteres {
+
+    position: relative;
+    width: 48%;
+    height: 300px;
+    margin-top: 5px;
+
+    float: left;
 }
 
 #affichageRslt {
-    display: inline-block;
-    width: 400px;
-    margin-left: 50px;
+    border:1px solid grey;
+    position: relative;
+    width: 50%;
+    height: 558px;
+    margin-left: 48%;
+    margin-top: 5px;
+    padding: 5px;
+
+}
+
+#corps {  
+    display: block;
+    margin: auto;
+
 }
 
 #affichage {
     display: inline-block;
     width: 25%;
+}
+
+footer {
+
 }
 
 figure {
@@ -112,12 +136,7 @@ input[type="submit"]:hover,input[type="reset"]:hover {
     border-style: solid;
     border-width: 60px 60px;  /* Largeur du cadre */
     border-image: url('../img/ccadre3.jpg') 140 140 round ;/*Largeur du marge, max 210 */
-}
-
-#choix-fichier {
-    padding:10px;    
-    border: 1px solid gray;
-    width: 600px;
+    display: block;
     margin: auto;
 }
 
@@ -131,5 +150,5 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 
 #chargement {
     display:none; 
-  
+
 }
