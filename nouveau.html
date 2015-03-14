@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+        
+        <div id="nvCompte">
+           
+            <form id="creerForm" action="" method="post">
+                 <h2> Créer nouveau compte </h2>
+                <label for="nom">Nom:</label><br />
+                <input name="nom" type="text" id="nom"/><br />
+
+                <label for="prenom">Prénom :</label><br />
+                <input name="prenom" type="text" id="prenom"/><br />
+                
+                <label for="usager">Choisissez votre nom d'usager:</label><br />
+                <input name="usager" type="text" id="usager" required/><br />
+                
+                <label for="pass">Créez un mot de passe:</label><br />
+                <input name="pass" type="password" id="pass" required/><br />
+                
+                <label for="confirmPass">Confirmez votre mot de passe:</label><br />
+                <input name="confirmPass" type="password" id="confirmPass"/><br />
+
+                <label for="tel">Téléphone:</label><br />
+                <input name="tel" type="tel" id="tel" /><br />
+
+                <label for="courriel">Courriel:</label><br />
+                <input name="courriel" type="email" id="courriel" /><br />  
+                
+                <label for="adresse">Adresse:</label><br />
+                <textarea name="adresse" id="adresse"></textarea><br />                                    
+
+                <input type="submit" value="Créer"/>
+                <input type="reset" value="Vider"/>
+            </form>
+        </div>		
+    </body>
+</html>

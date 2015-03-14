@@ -39,12 +39,10 @@ h3 {
 }
 
 #choixCriteres {
-
     position: relative;
     width: 48%;
     height: 300px;
     margin-top: 5px;
-
     float: left;
 }
 
@@ -56,22 +54,16 @@ h3 {
     margin-left: 48%;
     margin-top: 5px;
     padding: 5px;
-
 }
 
 #corps {  
     display: block;
     margin: auto;
-
 }
 
 #affichage {
     display: inline-block;
     width: 25%;
-}
-
-footer {
-
 }
 
 figure {
@@ -110,22 +102,69 @@ label {
     margin-top: 4px; 
     width: 170px;
     display: inline-block;
-    //border: 1px solid gray; 
+}
+
+div.auth {
+    margin: auto;
+    margin-top: 90px;	
+    background-color: #fff;
+    padding: 30px;
+    border: solid;
+    border-width: 1px;
+    border-color: #e3e3e3;
+    height: 250px;
+    width: 300px;
+    box-shadow:3px 5px 20px 3px;	
+    border-radius: 5px;
+}
+
+#legend {
+    font-weight: bold;
+    margin-top: 4px; 
+    margin-bottom: 50px;
+}
+
+#creerForm {
+    margin-left: 50px;
+}
+
+#nvCompte{
+    margin: auto;
+    margin-top: 20px;	
+    background-color: #fff;
+    padding: 30px;
+    border: solid;
+    border-width: 1px;
+    border-color: #e3e3e3;  
+    width: 30%;
+    box-shadow:3px 5px 20px 3px;	
+    border-radius: 5px;
+}
+
+#nvCompte label{
+    width: 400px;
+    margin-top: 15px;
 }
 
 input{    
     margin-top: 4px; 
-    padding: 2px;
+    padding: 2px;	
 }
 
-input[type="text"]{    
+input[type="text"], input[type="password"],
+input[type="tel"],input[type="email"],textarea{
+    width: 230px;	
+}
+
+#ht,#lr,#pf {    
     width: 40px;	        
 }
 
 input[type="submit"], input[type="reset"]{
     margin-left: 30px;
     margin-top: 30px;
-    display: block;
+    display: inline;
+    width: 100px;	
 }
 
 input[type="submit"]:hover,input[type="reset"]:hover {
@@ -135,9 +174,10 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 #imgRslt {
     border-style: solid;
     border-width: 60px 60px;  /* Largeur du cadre */
-    border-image: url('../img/ccadre3.jpg') 140 140 round ;/*Largeur du marge, max 210 */
+    border-image: url('../img/ccadre3.jpg') 140 140 round ;/*Largeur du marge, max 210 */   
     display: block;
     margin: auto;
+    box-shadow: 0 0 5px #888888;
 }
 
 #success {

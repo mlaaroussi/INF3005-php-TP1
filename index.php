@@ -35,7 +35,7 @@
                 <div id="corps">
                     <div id="choixCriteres">
                         <h2>2.Adapter votre choix :</h2>                    
-                        <input type="hidden" id="cadre-choisi" name="cadre-choisi" >
+                        <input type="hidden" id="cadreChoisi" name="cadre-choisi" >
                         <h3>Dimensions :</h3>
                         <label for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
                         <input type="range" id="rangeH" value="50">

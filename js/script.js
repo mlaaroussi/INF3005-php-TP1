@@ -50,6 +50,14 @@ $(document).ready(function () {
     $("#rangeP").on("input", function () {
         $("#pf").val($("#rangeP").val() / 20);
     });
+   
+     $("#rangeP").on("input", function () {
+        var profondeur = $("#rangeP").val() / 20;
+        $("#pf").val(profondeur);
+        $("#imgRslt").css("box-shadow",profondeur*3+"px "+profondeur*3+"px 5px #888888");
+        
+    });
+     
 });
 
 //Fonction qui permet de visualiser l'image après validation
