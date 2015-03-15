@@ -16,63 +16,59 @@
             <h1>Composition et achat de cadres pour les photos en ligne</h1>
         </header>
 
-        <section>
-            <h2>1.Modèles de cadres: </h2>
-            <figure>
-                <a href=""> <img id="cadre1" src="img/cadre1.jpg" alt="cadre 1" width="80" height="80" > </a> 
-                <a href=""> <img id="cadre2" src="img/cadre2.jpg"alt="cadre 2" width="80" height="80"> </a>
-                <a href=""> <img id="cadre3" src="img/cadre3.jpg"alt="cadre 3" width="80" height="80"> </a>  
-                <a href=""> <img id="cadre4" src="img/cadre4.jpg" alt="cadre 4" width="80" height="80" > </a> 
-                <a href=""> <img id="cadre5" src="img/cadre5.jpg"alt="cadre 5" width="80" height="80"> </a> 
-                <a href=""> <img id="cadre6" src="img/cadre6.jpg"alt="cadre 6" width="80" height="80"> </a>
-                <a href=""> <img id="cadre7" src="img/cadre7.jpg" alt="cadre 7" width="80" height="80" > </a> 
-                <a href=""> <img id="cadre8" src="img/cadre8.jpg"alt="cadre 8" width="80" height="80" > </a>   
-                <a href=""> <img id="cadre9" src="img/cadre9.jpg"alt="cadre 9" width="80" height="80" > </a>   
-                <figcaption> Veuillez choisir un modèle de cadre.</figcaption>
-            </figure>
-
-            <form id="formPrincipal">
-                <div id="corps">
+        <section>            
+            <form id="formPrincipal">               
+                <div id="corps">                   
                     <div id="choixCriteres">
-                        <h2>2.Adapter votre choix :</h2>                    
-                        <input type="hidden" id="cadreChoisi" name="cadre-choisi" >
+                        <h2>1.Choisissez un fichier contenant votre photo:</h2>
+
+                        <input type="file" name="file" id="fichierImg" accept="image/*" required />                                 
+                        <h2>2.Adapter votre choix :</h2>                                           
                         <h3>Dimensions :</h3>
-                        <label for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
+                        <label class="normal" for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
                         <input type="range" id="rangeH" value="50">
                         <input type="text" name="hauteur" id="ht" value="50">
                         <br/>
-                        <label for="rangeL" >Largeur: <span class="normal">(max. 100cm)</span> </label> 
+                        <label class="normal" for="rangeL" >Largeur: <span class="normal">(max. 100cm)</span> </label> 
                         <input type="range" id="rangeL" value="50">
                         <input type="text" name="largeur" id="lr" value="50">
                         <br/>
-                        <label for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
+                        <label class="normal" for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
                         <input type="range" id="rangeP" value="40">
-                        <input type="text" name="profondeur" id="pf" value="2">                                       
-                        
+                        <input type="text" name="profondeur" id="pf" value="2"> 
+                        <br/>
+                        <label class="normal" for="rangeLc" >Largeur cadre: <span class="normal">(max. 10cm)</span> </label>
+                        <input type="range" id="rangeLc" value="40">
+                        <input type="text" name="lCadre" id="lCadre" value="10">
+                        <br/>
+                        <label class="normal" for="rangeMr" >Marge: <span class="normal">(max. 10cm)</span> </label>
+                        <input type="range" id="rangeMr" value="40">
+                        <input type="text" name="marge" id="marge" value="10">                       
+
                         <h3>Couleurs des cotés du cadre:</h3>
                         <label class="couleurs" for="coulHaut" >Haut: </label>
-                        <input type="color" name="coulHaut" id="coulHaut"/>
-                         <label class="couleurs" for="coulBas" >Bas: </label>
-                         <input type="color" name="coulBas" id="coulBas"/>
+                        <input type="color" name="coulHaut" id="coulHaut" value="#ED1A59"/>
+                        <label class="couleurs" for="coulBas" >Bas: </label>
+                        <input type="color" name="coulBas" id="coulBas" value="#ED1A59"/>
                         <label class="couleurs" for="coulGauche" >Gauche: </label>
-                        <input type="color" name="coulGauche" id="coulGauche"/>
-                         <label class="couleurs" for="coulDroit" >Droit: </label>
-                         <input type="color" name="coulDroit" id="coulDroit"/>
+                        <input type="color" name="coulGauche" id="coulGauche" value="#ED1A59"/>
+                        <label class="couleurs" for="coulDroit" >Droit: </label>
+                        <input type="color" name="coulDroit" id="coulDroit" value="#ED1A59"/>
+                        <h3>Matériel du cadre:</h3>
 
-                        <h2>3.Fournir un fichier contenant votre photo</h2>
-                        <input type="file" name="file" id="fichierImg" accept="image/*" required />              
+                        <input type="radio" name="type" value="Bois" checked/>Bois <img src="img/cadre2.jpg" width="48" height="48">
+                        <input type="radio" name="type" value="Acier"/>Acier <img src="img/cadre6.jpg" width="48" height="48">                    
+                        <input type="radio" name="type" value="Plastique"/>Plastique <img src="img/cadre9.jpg" width="48" height="48">                    
                         <br/>
                         <input type="submit" value="Produire facture"/>
-
                         <div id="message"></div>
-
                     </div>
 
                     <div id="affichageRslt">
                         <h2> Résultat de l'ecadrement <img id="chargement" src="img/chargement.gif" width="22" height="22" ></h2>                                    
-                        
-                        <canvas id="canvasRslt" width="400" height="400" >
-                            Votre navigateur ne support pas Canvas 
+
+                        <canvas id="canvasRslt" width="550" height="550" >
+                            Votre navigateur ne supporte pas Canvas 
                         </canvas>
                     </div>
                 </div>

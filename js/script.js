@@ -5,10 +5,11 @@ var long = 320;
  var haut = 250;
  var lcadre = 20;
  var marge = 30;
- var couleurHaut = "#A3653B";
- var couleurBas = "#A3653B";
- var couleurGauche = "#A3653B";
- var couleurDroit = "#A3653B";
+ var profond =10;
+ var couleurHaut ="#ED1A59";
+ var couleurBas = "#ED1A59";
+ var couleurGauche = "#ED1A59";
+ var couleurDroit ="#ED1A59";
 var imgSrc = "img/no-image.jpg"; 
 
 $(document).ready(function (e) {
@@ -51,7 +52,7 @@ $(document).ready(function (e) {
         //changer hauteur
         $("#ht").val($("#rangeH").val());
        // $("#imgRslt").attr("height", $("#rangeH").val() * 4);
-         haut = $("#rangeH").val() * 4;         
+         haut = $("#rangeH").val() * 5;         
          dessinerCadre();
 
     });
@@ -60,19 +61,27 @@ $(document).ready(function (e) {
         //changer laegeur
         $("#lr").val($("#rangeL").val());
         //$("#imgRslt").attr("width", $("#rangeL").val() * 4);
-         long = $("#rangeL").val() * 4;         
+         long = $("#rangeL").val() * 5;         
          dessinerCadre();
     });
 
     $("#rangeP").on("input", function () {
         $("#pf").val($("#rangeP").val() / 20);
+        profond = $("#rangeP").val() / 4;         
+         dessinerCadre();
     });
-
-    $("#rangeP").on("input", function () {
-        var profondeur = $("#rangeP").val() / 20;
-        $("#pf").val(profondeur);
-        $("#imgRslt").css("box-shadow", profondeur * 3 + "px " + profondeur * 3 + "px 5px #888888");
-
+  
+    
+     $("#rangeLc").on("input", function () {        
+        $("#lCadre").val($("#rangeLc").val()/10);
+         lcadre = $("#rangeLc").val() / 2;         
+         dessinerCadre();
+    });
+    
+     $("#rangeMr").on("input", function () {        
+        $("#marge").val($("#rangeMr").val()/10);
+         marge = $("#rangeMr").val() / 2;         
+         dessinerCadre();
     });
         
      $("#coulHaut").on("input", function () {
@@ -164,7 +173,7 @@ function dessinerCadre() {
     ctx.stroke();
     ctx.fillStyle = couleurGauche;
     ctx.fill();
-    ctx.closePath();
+    ctx.closePath();         
 
     // droite du cadre
     ctx.beginPath();
@@ -172,9 +181,21 @@ function dessinerCadre() {
     ctx.lineTo(long - lcadre, lcadre);
     ctx.lineTo(long - lcadre, haut - lcadre);
     ctx.lineTo(long, haut);
-    ctx.moveTo(long, 1);
+    ctx.lineTo(long, 1);
     ctx.stroke();
     ctx.fillStyle = couleurDroit  ;
+    ctx.fill();
+    ctx.closePath();
+    
+    // profondeur droite du cadre
+    ctx.beginPath();
+    ctx.moveTo(long, 1);
+    ctx.lineTo(long+profond, profond);
+    ctx.lineTo(long+profond, haut+profond );
+    ctx.lineTo(long, haut );
+    ctx.lineTo(long, 1);
+    ctx.stroke();
+    ctx.fillStyle = couleurDroit;
     ctx.fill();
     ctx.closePath();
 
@@ -184,9 +205,22 @@ function dessinerCadre() {
     ctx.lineTo(lcadre, haut - lcadre);
     ctx.lineTo(long - lcadre, haut - lcadre);
     ctx.lineTo(long, haut);
-    ctx.moveTo(1, haut);
+    ctx.lineTo(1, haut);
     ctx.stroke();
     ctx.fillStyle = couleurBas;
+    ctx.fill();
+    ctx.closePath();
+    
+     // profondeur bas du cadre
+    ctx.beginPath();
+    ctx.moveTo(1, haut);
+    ctx.lineTo(profond, haut+profond);
+    ctx.lineTo(long+profond, haut +profond);
+    ctx.lineTo(long, haut);
+    ctx.lineTo(1, haut);    
+  ctx.stroke();
+    ctx.fillStyle = couleurBas;
+   
     ctx.fill();
     ctx.closePath();
 
@@ -199,4 +233,7 @@ function dessinerCadre() {
     ctx.lineTo(lcadre + marge, lcadre + marge);
     //ctx.stroke();
     ctx.closePath();
+   
+    
+    
 }

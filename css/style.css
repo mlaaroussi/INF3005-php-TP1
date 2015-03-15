@@ -100,7 +100,7 @@ figure a:link, figure a:visited {
 label.normal {
     font-weight: bold;
     margin-top: 4px; 
-    width: 170px;
+    width: 180px;
     display: inline-block;
 }
 
@@ -163,7 +163,7 @@ input[type="tel"],input[type="email"],textarea{
     width: 230px;	
 }
 
-#ht,#lr,#pf {    
+#ht,#lr,#pf,#lCadre,#marge {    
     width: 40px;	        
 }
 
