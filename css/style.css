@@ -97,7 +97,7 @@ figure a:link, figure a:visited {
     font-weight:normal;
 }
 
-label {
+label.normal {
     font-weight: bold;
     margin-top: 4px; 
     width: 170px;
@@ -106,9 +106,8 @@ label {
 
 label.couleurs {
     font-weight: bold;
-    margin-top: 4px; 
-    width: 50px;
-    margin-left: 5px;
+    margin-top: 4px;     
+    margin-left: 10px;
 
 }
 

@@ -5,10 +5,10 @@ var long = 320;
  var haut = 250;
  var lcadre = 20;
  var marge = 30;
- var couleurHaut = "red";
- var couleurBas = "blue";
- var couleurGauche = "gray";
- var couleurDroit = "green";
+ var couleurHaut = "#A3653B";
+ var couleurBas = "#A3653B";
+ var couleurGauche = "#A3653B";
+ var couleurDroit = "#A3653B";
 var imgSrc = "img/no-image.jpg"; 
 
 $(document).ready(function (e) {
