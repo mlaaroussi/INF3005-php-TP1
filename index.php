@@ -47,11 +47,17 @@
                         <br/>
                         <label for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
                         <input type="range" id="rangeP" value="40">
-                        <input type="text" name="profondeur" id="pf" value="2">
-                        <br/>
-                        <label for="couleur" >Couleur: </label>
-                        <input type="color" name="couleur"/>
-
+                        <input type="text" name="profondeur" id="pf" value="2">                                       
+                        
+                        <h3>Couleurs des cotés du cadre:</h3>
+                        <label class="couleurs" for="coulHaut" >Haut: </label>
+                        <input type="color" name="coulHaut" id="coulHaut"/>
+                         <label class="couleurs" for="coulBas" >Bas: </label>
+                         <input type="color" name="coulBas" id="coulBas"/>
+                        <label class="couleurs" for="coulGauche" >Gauche: </label>
+                        <input type="color" name="coulGauche" id="coulGauche"/>
+                         <label class="couleurs" for="coulDroit" >Droit: </label>
+                         <input type="color" name="coulDroit" id="coulDroit"/>
 
                         <h2>3.Fournir un fichier contenant votre photo</h2>
                         <input type="file" name="file" id="fichierImg" accept="image/*" required />              
@@ -64,7 +70,10 @@
 
                     <div id="affichageRslt">
                         <h2> Résultat de l'ecadrement <img id="chargement" src="img/chargement.gif" width="22" height="22" ></h2>                                    
-                        <img id="imgRslt" src="img/no-image.jpg" width="150" height="150" >                      
+                        
+                        <canvas id="canvasRslt" width="400" height="400" >
+                            Votre navigateur ne support pas Canvas 
+                        </canvas>
                     </div>
                 </div>
 
