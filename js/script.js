@@ -17,42 +17,21 @@ $(document).ready(function (e) {
 
     dessinerCadre();
 
-
-
-    $("#formPrincipal").submit(function () {
-        var data = document.getElementById("canvasRslt").toDataURL();
-        $.post("produire_facture.php", {
-            imageData: data
-        }, function (data) {
-            window.location = data;
-        });
+    $("#formPrincipal").submit(function () {        
+        canvasNoirEtBlanc();
     });
-
-    $("figure a").each(function () {
-
-        $(this).click(function () {
-            $('figure img').css('background', '#e3e7e3');
-            $(this).children('img').css('background', '#333333');
-            $('#cadre-choisi').val($(this).children('img').attr('id'));
-            modifierDimensionCadre(170, $(this).children('img').attr('src').replace("cadre", "ccadre"));
-            return (false);
-        });
-
-    });
-
+   
     $("#rangeH").on("input", function () {
         //changer hauteur
-        $("#ht").val($("#rangeH").val());
-        // $("#imgRslt").attr("height", $("#rangeH").val() * 4);
+        $("#ht").val($("#rangeH").val());        
         haut = $("#rangeH").val() * 5;
         dessinerCadre();
 
     });
 
     $("#rangeL").on("input", function () {
-        //changer laegeur
-        $("#lr").val($("#rangeL").val());
-        //$("#imgRslt").attr("width", $("#rangeL").val() * 4);
+        //changer largeur
+        $("#lr").val($("#rangeL").val());       
         long = $("#rangeL").val() * 5;
         dessinerCadre();
     });
@@ -124,15 +103,13 @@ function imageIsLoaded(e) {
     dessinerCadre();
 }
 
-function modifierDimensionCadre(dim, img) {
-
-    $('#imgRslt').css("border-image", "url(" + img + ") " + dim + " " + dim + " round");
-}
-
+//Fonction qui permet de dessiner le cadre avec le Canvas, utilise des variables globales
 function dessinerCadre() {
-
     var canvas = $("#canvasRslt")[0];
     var ctx = canvas.getContext("2d");
+
+    canvas.width = long + profond + 2;
+    canvas.height = haut + profond + 2;
 
     //pour initialiser le canvas precedent
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -140,6 +117,7 @@ function dessinerCadre() {
     var img = new Image();
     img.src = imgSrc;
     img.onload = function () {
+        //positionnement de l'image dans le cadre
         ctx.drawImage(img, lcadre + marge, lcadre + marge, long - 2 * (lcadre + marge), haut - 2 * (lcadre + marge));
     };
     // Haut du cadre
@@ -226,25 +204,25 @@ function dessinerCadre() {
     ctx.closePath();
 }
 
-function uploadEx() {
-                var canvas = document.getElementById("canvas");
-                var dataURL = canvas.toDataURL("image/png");
-                document.getElementById('hidden_data').value = dataURL;
-                var fd = new FormData(document.forms["form1"]);
- 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'upload_data.php', true);
- 
-                xhr.upload.onprogress = function(e) {
-                    if (e.lengthComputable) {
-                        var percentComplete = (e.loaded / e.total) * 100;
-                        console.log(percentComplete + '% uploaded');
-                        alert('Succesfully uploaded');
-                    }
-                };
- 
-                xhr.onload = function() {
- 
-                };
-                xhr.send(fd);
-            };
+//fonction qui permet de transformer le canvas en noir et blanc (grayScale),et de stocker les données 
+//de l'image resultat dans un champ caché.
+function canvasNoirEtBlanc() {
+    var canvas = $("#canvasRslt")[0];
+    var ctx = canvas.getContext("2d");
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    //Transformation grayScale
+    var pixels = imgData.data;
+    for (var i = 0, n = pixels.length; i < n; i += 4) {
+        var grayscale = pixels[i] * .3 + pixels[i + 1] * .59 + pixels[i + 2] * .11;
+        pixels[i  ] = grayscale;        // red
+        pixels[i + 1] = grayscale;        // green
+        pixels[i + 2] = grayscale;        // blue       
+    }
+    //on remet l'image en noir et blanc
+    ctx.putImageData(imgData, 0, 0);
+       
+    var canvasData = canvas.toDataURL("image/png");
+     //on remplit le champ caché par les données de l'image
+    $("#imgData").val(canvasData);  
+}
