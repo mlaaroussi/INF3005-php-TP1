@@ -14,19 +14,19 @@
                 Authentification
             </div>
 
-            <form id="loginForm" method="post">
+            <form id="loginForm" method="post" action="script_login.php">
                 <label class="normal" for="login">Login:</label>
-                <input type="text" name="login" id="login">
+                <input type="text" name="login" required placeholder = "Login">
 
                 <label class="normal" for="pass">Mot de passe: </label>
-                <input type="password" name="pass" id="pass">
+                <input type="password" name="pass" required placeholder = "Mot de passe">
 
                 <span id="connexion_msg"> </span>
                 <br>
                 <a href="nouveau.html"> Créer nouveau compte</a>
 
                 <input type="submit" value="Se connecter">                                
-                
+                <?php ?>
             </form>
         </div>
 
