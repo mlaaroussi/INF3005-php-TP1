@@ -2,7 +2,7 @@
 
 try
 {
-	$bdd = new PDO('mysql:host=localhost;dbname=CADRES', 'root', 'root');
+	$bdd = new PDO('mysql:host=localhost;dbname=CADRES', 'root', 'mohamed');
 	$bdd->exec("SET CHARACTER SET utf8");
 }
 catch(Exception $e)

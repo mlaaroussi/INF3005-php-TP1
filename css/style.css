@@ -132,6 +132,24 @@ div.auth {
     border-radius: 5px;
 }
 
+
+div.erreur {
+    margin: auto;
+    margin-top: 90px;	
+    background-color: #fff;
+    padding: 30px;
+    border: solid;
+    border-width: 1px;
+    border-color: #e3e3e3;
+    height: 150px;
+    width: 400px;
+    box-shadow:3px 5px 20px 3px;	
+    border-radius: 5px;    
+    font-size: 18px;
+}
+div.erreur img{    
+    margin-left: 130px;
+}
 #legend {
     font-weight: bold;
     margin-top: 4px; 
@@ -191,6 +209,7 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 
 #erreur {
     color:red;
+    display: block;
 }
 
 #chargement {
