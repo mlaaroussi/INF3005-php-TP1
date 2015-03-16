@@ -7,10 +7,19 @@
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
-        <script type="text/javascript" src="js/script.js"></script>
+
     </head>
     <body>       
         <?php
+        if (isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
+            $imageData = $GLOBALS['HTTP_RAW_POST_DATA'];
+            echo "imagedata1: " . $imageData;
+            $filteredData = substr($imageData, strpos($imageData, ",") + 1);
+            $unencodedData = base64_decode($filteredData);
+            $fp = fopen('upload/canvas.png', 'wb');
+            fwrite($fp, $unencodedData);
+            fclose($fp);
+        }
         if (isset($_FILES["fichierImg"]["type"])) {
             $extensionsValides = array("jpeg", "jpg", "png", "gif");
             $temporary = explode(".", $_FILES["fichierImg"]["name"]);
@@ -35,7 +44,6 @@
                 echo "<span id='erreur'> Taille ou type de fichier non valide, seulement les images de taille inférieur à 10Mo sont acceptées <span>";
             }
         }
-       
         ?>
         <section>
             <h2> Facture </h2>
@@ -64,15 +72,20 @@
                         <li><?php echo $_POST["type"] ?></li>
                     </ul>
 
-                </div>            
-                <?php
+                </div>  
 
-?>
                 <div id="apercue">
-                    <img src="transformerImg.php" width="400" height="400">
-                </div>
-                <a href="mailto:votre_email?subject= sujet_du_message&body= corps_du_message">Envoyer par email</a>              
-            </div>
+                    <?php
+                    $imageData = $_POST["imgData"];
+                    ?>
+                    <h3>Schéma en noir et blanc de l'encadrement</h3>
+
+                    <img id="aperc" src= <?php echo $imageData ?> >                                           
+                </div>                
+                            
+            </div> 
+             <a href="mailto:votre_email?subject= sujet_du_message&body= corps_du_message">Envoyer par email</a> 
         </section>
+
     </body>
 </html>

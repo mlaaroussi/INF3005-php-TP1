@@ -39,11 +39,11 @@
                         <br/>
                         <label class="normal" for="rangeLc" >Largeur cadre: <span class="normal">(max. 10cm)</span> </label>
                         <input type="range" id="rangeLc" value="40">
-                        <input type="text" name="lCadre" id="lCadre" value="10" readonly>
+                        <input type="text" name="lCadre" id="lCadre" value="5" readonly>
                         <br/>
                         <label class="normal" for="rangeMr" >Marge: <span class="normal">(max. 10cm)</span> </label>
                         <input type="range" id="rangeMr" value="40">
-                        <input type="text" name="marge" id="marge" value="10" readonly>                       
+                        <input type="text" name="marge" id="marge" value="5" readonly>                       
 
                         <h3>Couleurs des cotés du cadre:</h3>
                         <label class="couleurs" for="coulHaut" >Haut: </label>
@@ -59,6 +59,7 @@
                         <input type="radio" name="type" value="Bois" checked/>Bois <img src="img/bois.jpg" width="48" height="48">
                         <input type="radio" name="type" value="Acier"/>Acier <img src="img/acier.jpg" width="48" height="48">                    
                         <input type="radio" name="type" value="Plastique"/>Plastique <img src="img/plastique.jpg" width="48" height="48">                    
+                        <input type="hidden" name="imgData" id="imgData"/>
                         <br/>
                         <input type="submit" value="Produire facture"/>
                         <div id="message"></div>
@@ -67,7 +68,7 @@
                     <div id="affichageRslt">
                         <h2> Résultat de l'ecadrement <img id="chargement" src="img/chargement.gif" width="22" height="22" ></h2>                                    
 
-                        <canvas id="canvasRslt" width="550" height="550" >
+                        <canvas id="canvasRslt"  >
                             Votre navigateur ne supporte pas Canvas 
                         </canvas>
                     </div>
