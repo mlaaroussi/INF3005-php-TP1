@@ -17,33 +17,33 @@
         </header>
 
         <section>            
-            <form id="formPrincipal">               
+            <form id="formPrincipal" action="produire_facture.php" method="post" enctype="multipart/form-data" >               
                 <div id="corps">                   
                     <div id="choixCriteres">
                         <h2>1.Choisissez un fichier contenant votre photo:</h2>
 
-                        <input type="file" name="file" id="fichierImg" accept="image/*" required />                                 
+                        <input type="file" name="fichierImg" id="fichierImg" accept="image/*" required />                                 
                         <h2>2.Adapter votre choix :</h2>                                           
                         <h3>Dimensions :</h3>
                         <label class="normal" for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
                         <input type="range" id="rangeH" value="50">
-                        <input type="text" name="hauteur" id="ht" value="50">
+                        <input type="text" name="hauteur" id="ht" value="50" readonly>
                         <br/>
                         <label class="normal" for="rangeL" >Largeur: <span class="normal">(max. 100cm)</span> </label> 
                         <input type="range" id="rangeL" value="50">
-                        <input type="text" name="largeur" id="lr" value="50">
+                        <input type="text" name="largeur" id="lr" value="50" readonly>
                         <br/>
                         <label class="normal" for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
                         <input type="range" id="rangeP" value="40">
-                        <input type="text" name="profondeur" id="pf" value="2"> 
+                        <input type="text" name="profondeur" id="pf" value="2" readonly> 
                         <br/>
                         <label class="normal" for="rangeLc" >Largeur cadre: <span class="normal">(max. 10cm)</span> </label>
                         <input type="range" id="rangeLc" value="40">
-                        <input type="text" name="lCadre" id="lCadre" value="10">
+                        <input type="text" name="lCadre" id="lCadre" value="10" readonly>
                         <br/>
                         <label class="normal" for="rangeMr" >Marge: <span class="normal">(max. 10cm)</span> </label>
                         <input type="range" id="rangeMr" value="40">
-                        <input type="text" name="marge" id="marge" value="10">                       
+                        <input type="text" name="marge" id="marge" value="10" readonly>                       
 
                         <h3>Couleurs des cotés du cadre:</h3>
                         <label class="couleurs" for="coulHaut" >Haut: </label>
@@ -56,9 +56,9 @@
                         <input type="color" name="coulDroit" id="coulDroit" value="#ED1A59"/>
                         <h3>Matériel du cadre:</h3>
 
-                        <input type="radio" name="type" value="Bois" checked/>Bois <img src="img/cadre2.jpg" width="48" height="48">
-                        <input type="radio" name="type" value="Acier"/>Acier <img src="img/cadre6.jpg" width="48" height="48">                    
-                        <input type="radio" name="type" value="Plastique"/>Plastique <img src="img/cadre9.jpg" width="48" height="48">                    
+                        <input type="radio" name="type" value="Bois" checked/>Bois <img src="img/bois.jpg" width="48" height="48">
+                        <input type="radio" name="type" value="Acier"/>Acier <img src="img/acier.jpg" width="48" height="48">                    
+                        <input type="radio" name="type" value="Plastique"/>Plastique <img src="img/plastique.jpg" width="48" height="48">                    
                         <br/>
                         <input type="submit" value="Produire facture"/>
                         <div id="message"></div>
@@ -72,7 +72,6 @@
                         </canvas>
                     </div>
                 </div>
-
             </form>           
         </section>
 

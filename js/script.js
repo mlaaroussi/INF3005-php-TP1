@@ -2,37 +2,29 @@
  * @author Mohamed LAAROUSSI, LAAM03038304
  */
 var long = 320;
- var haut = 250;
- var lcadre = 20;
- var marge = 30;
- var profond =10;
- var couleurHaut ="#ED1A59";
- var couleurBas = "#ED1A59";
- var couleurGauche = "#ED1A59";
- var couleurDroit ="#ED1A59";
-var imgSrc = "img/no-image.jpg"; 
+var haut = 250;
+var lcadre = 20;
+var marge = 30;
+var profond = 10;
+var couleurHaut = "#ED1A59";
+var couleurBas = "#ED1A59";
+var couleurGauche = "#ED1A59";
+var couleurDroit = "#ED1A59";
+var imgSrc = "img/no-image.jpg";
 
 $(document).ready(function (e) {
 
 
     dessinerCadre();
 
-    $("#formPrincipal").submit(function (e) {
-        e.preventDefault();
-        $("#message").empty();
-        $("#chargement").show();
-        $.ajax({
-            url: "upload.php",
-            type: "POST",
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function (data)
-            {
-                $("#chargement").hide();
-                $("#message").html(data);
-            }
+
+
+    $("#formPrincipal").submit(function () {
+        var data = document.getElementById("canvasRslt").toDataURL();
+        $.post("produire_facture.php", {
+            imageData: data
+        }, function (data) {
+            window.location = data;
         });
     });
 
@@ -51,9 +43,9 @@ $(document).ready(function (e) {
     $("#rangeH").on("input", function () {
         //changer hauteur
         $("#ht").val($("#rangeH").val());
-       // $("#imgRslt").attr("height", $("#rangeH").val() * 4);
-         haut = $("#rangeH").val() * 5;         
-         dessinerCadre();
+        // $("#imgRslt").attr("height", $("#rangeH").val() * 4);
+        haut = $("#rangeH").val() * 5;
+        dessinerCadre();
 
     });
 
@@ -61,47 +53,46 @@ $(document).ready(function (e) {
         //changer laegeur
         $("#lr").val($("#rangeL").val());
         //$("#imgRslt").attr("width", $("#rangeL").val() * 4);
-         long = $("#rangeL").val() * 5;         
-         dessinerCadre();
+        long = $("#rangeL").val() * 5;
+        dessinerCadre();
     });
 
     $("#rangeP").on("input", function () {
         $("#pf").val($("#rangeP").val() / 20);
-        profond = $("#rangeP").val() / 4;         
-         dessinerCadre();
-    });
-  
-    
-     $("#rangeLc").on("input", function () {        
-        $("#lCadre").val($("#rangeLc").val()/10);
-         lcadre = $("#rangeLc").val() / 2;         
-         dessinerCadre();
-    });
-    
-     $("#rangeMr").on("input", function () {        
-        $("#marge").val($("#rangeMr").val()/10);
-         marge = $("#rangeMr").val() / 2;         
-         dessinerCadre();
-    });
-        
-     $("#coulHaut").on("input", function () {
-         couleurHaut = $(this).val();         
-         dessinerCadre();
-    });
-     $("#coulBas").on("input", function () {
-         couleurBas = $(this).val();         
-         dessinerCadre();
-    });
-     $("#coulDroit").on("input", function () {
-         couleurDroit = $(this).val();         
-         dessinerCadre();
-    });
-    
-    $("#coulGauche").on("input", function () {
-         couleurGauche = $(this).val();         
-         dessinerCadre();
+        profond = $("#rangeP").val() / 4;
+        dessinerCadre();
     });
 
+
+    $("#rangeLc").on("input", function () {
+        $("#lCadre").val($("#rangeLc").val() / 10);
+        lcadre = $("#rangeLc").val() / 2;
+        dessinerCadre();
+    });
+
+    $("#rangeMr").on("input", function () {
+        $("#marge").val($("#rangeMr").val() / 10);
+        marge = $("#rangeMr").val() / 2;
+        dessinerCadre();
+    });
+
+    $("#coulHaut").on("input", function () {
+        couleurHaut = $(this).val();
+        dessinerCadre();
+    });
+    $("#coulBas").on("input", function () {
+        couleurBas = $(this).val();
+        dessinerCadre();
+    });
+    $("#coulDroit").on("input", function () {
+        couleurDroit = $(this).val();
+        dessinerCadre();
+    });
+
+    $("#coulGauche").on("input", function () {
+        couleurGauche = $(this).val();
+        dessinerCadre();
+    });
 
 //Fonction qui permet de visualiser l'image après validation
     $(function () {
@@ -109,9 +100,9 @@ $(document).ready(function (e) {
             $("#message").empty(); // Pour supprimer le message d'erreur précédent
             var fichier = this.files[0];
             var type = fichier.type;
-            var typesAcceptes = ["image/jpeg", "image/png", "image/jpg"];
-            if (type !== typesAcceptes[0] && type !== typesAcceptes[1] && type !== typesAcceptes[2]) {
-                imgSrc = "img/no-image.jpg"; 
+            var typesAcceptes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
+            if (type !== typesAcceptes[0] && type !== typesAcceptes[1] && type !== typesAcceptes[2] && type !== typesAcceptes[3]) {
+                imgSrc = "img/no-image.jpg";
                 //$('#imgRslt1').attr('src', 'img/no-image.jpg');
                 $("#message").html("<span id='erreur'> Veuillez choisir une image valide, Seulement les types JPEG,JPG et PNG sont permis</span>");
                 return false;
@@ -140,12 +131,12 @@ function modifierDimensionCadre(dim, img) {
 
 function dessinerCadre() {
 
- var canvas = $("#canvasRslt")[0];
+    var canvas = $("#canvasRslt")[0];
     var ctx = canvas.getContext("2d");
-    
+
     //pour initialiser le canvas precedent
-     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     var img = new Image();
     img.src = imgSrc;
     img.onload = function () {
@@ -173,7 +164,7 @@ function dessinerCadre() {
     ctx.stroke();
     ctx.fillStyle = couleurGauche;
     ctx.fill();
-    ctx.closePath();         
+    ctx.closePath();
 
     // droite du cadre
     ctx.beginPath();
@@ -183,16 +174,16 @@ function dessinerCadre() {
     ctx.lineTo(long, haut);
     ctx.lineTo(long, 1);
     ctx.stroke();
-    ctx.fillStyle = couleurDroit  ;
+    ctx.fillStyle = couleurDroit;
     ctx.fill();
     ctx.closePath();
-    
+
     // profondeur droite du cadre
     ctx.beginPath();
     ctx.moveTo(long, 1);
-    ctx.lineTo(long+profond, profond);
-    ctx.lineTo(long+profond, haut+profond );
-    ctx.lineTo(long, haut );
+    ctx.lineTo(long + profond, profond);
+    ctx.lineTo(long + profond, haut + profond);
+    ctx.lineTo(long, haut);
     ctx.lineTo(long, 1);
     ctx.stroke();
     ctx.fillStyle = couleurDroit;
@@ -210,17 +201,17 @@ function dessinerCadre() {
     ctx.fillStyle = couleurBas;
     ctx.fill();
     ctx.closePath();
-    
-     // profondeur bas du cadre
+
+    // profondeur bas du cadre
     ctx.beginPath();
     ctx.moveTo(1, haut);
-    ctx.lineTo(profond, haut+profond);
-    ctx.lineTo(long+profond, haut +profond);
+    ctx.lineTo(profond, haut + profond);
+    ctx.lineTo(long + profond, haut + profond);
     ctx.lineTo(long, haut);
-    ctx.lineTo(1, haut);    
-  ctx.stroke();
+    ctx.lineTo(1, haut);
+    ctx.stroke();
     ctx.fillStyle = couleurBas;
-   
+
     ctx.fill();
     ctx.closePath();
 
@@ -233,7 +224,27 @@ function dessinerCadre() {
     ctx.lineTo(lcadre + marge, lcadre + marge);
     //ctx.stroke();
     ctx.closePath();
-   
-    
-    
 }
+
+function uploadEx() {
+                var canvas = document.getElementById("canvas");
+                var dataURL = canvas.toDataURL("image/png");
+                document.getElementById('hidden_data').value = dataURL;
+                var fd = new FormData(document.forms["form1"]);
+ 
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'upload_data.php', true);
+ 
+                xhr.upload.onprogress = function(e) {
+                    if (e.lengthComputable) {
+                        var percentComplete = (e.loaded / e.total) * 100;
+                        console.log(percentComplete + '% uploaded');
+                        alert('Succesfully uploaded');
+                    }
+                };
+ 
+                xhr.onload = function() {
+ 
+                };
+                xhr.send(fd);
+            };

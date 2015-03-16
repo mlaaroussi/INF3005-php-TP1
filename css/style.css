@@ -61,6 +61,13 @@ h3 {
     margin: auto;
 }
 
+#facture{  
+    border:1px solid grey;  
+    padding: 5px;
+    margin-top: 20px;    
+    height: 400px;   
+}
+
 #affichage {
     display: inline-block;
     width: 25%;
@@ -100,7 +107,7 @@ figure a:link, figure a:visited {
 label.normal {
     font-weight: bold;
     margin-top: 4px; 
-    width: 180px;
+    width: 190px;
     display: inline-block;
 }
 
