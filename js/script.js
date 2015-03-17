@@ -61,7 +61,7 @@ $(document).ready(function (e) {
         couleurBas = $(this).val();
         dessinerCadre();
     });
-    $("#coulDroit").on("input", function () {
+    $("#coulDroite").on("input", function () {
         couleurDroit = $(this).val();
         dessinerCadre();
     });

@@ -6,6 +6,7 @@ if (!isset($_SESSION['user'])) {
     header("location:login.html");
 }
 //telechargement de l'image.
+$nomUnique = uniqid(); //génerer unidentifiant unique
 if (isset($_FILES["fichierImg"]["type"])) {
     $extensionsValides = array("jpeg", "jpg", "png", "gif");
     $temporary = explode(".", $_FILES["fichierImg"]["name"]);
@@ -17,12 +18,9 @@ if (isset($_FILES["fichierImg"]["type"])) {
             echo "Code d'erreur: " . $_FILES["fichierImg"]["error"] . "<br/><br/>";
         } else {
             $source = $_FILES['fichierImg']['tmp_name']; // variable pour stocker le chemin du fichier source
-            if (file_exists("upload/" . $_FILES["fichierImg"]["name"])) {
-                $destination = "upload/" . $nomSansExtension . "-1." . $extension;
-                //echo "upload/" . $nomSansExtension . "-1." . $extension . "<br>";
-            } else {
-                $destination = "upload/" . $_FILES['fichierImg']['name'];
-            }
+            $imgNom= "img_".$nomUnique.".".$extension;
+            $destination = "upload/" .$imgNom;
+            
             move_uploaded_file($source, $destination); //déplacer le fichier vers $destination
             // echo "<span id='success'>Image téléchargée avec succès, (Nom du fichier : " . $_FILES["fichierImg"]["name"] . ")</span>";
         }
@@ -30,7 +28,18 @@ if (isset($_FILES["fichierImg"]["type"])) {
         echo "<span id='erreur'> Taille ou type de fichier non valide, seulement les images de taille inférieur à 10Mo sont acceptées <span>";
     }
 }
-//Produire la facture  
+//convertir les donneés du canvas noir et blanc en png
+        $canvasData= $_POST['imgData'];
+        $canvasData = substr($canvasData, strpos($canvasData, ",") + 1);        
+        $decodedData = base64_decode($canvasData);
+        $canvasNom= "cnv_".$nomUnique.".png";
+        $fp = fopen("upload/".$canvasNom, 'wb');
+        fwrite($fp, $decodedData);
+        fclose($fp);
+//$cheminCanv="http://moka.labunix.uqam.ca/~ch791163/PHP/Tp1_php/upload/".$canvasNom;
+$cheminCanv="upload/".$canvasNom;
+
+//Produire le message de la facture et envoi d'email  
 //date de livraison = date d'aujourd'hui plus 3 jours
 setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 $dateLivraison= ucwords((strftime("%A %e %B à %H h %M", mktime(10, 0, 0, date("m"), date("d") + 3, date("Y")))));
@@ -49,6 +58,7 @@ $message = '
             <h3>Date de livraison: <span style="color: #464646;">'.$dateLivraison.' </span> </h3>
             <div id="facture">    
                 <div id="criteres">
+                
                     <h3>Dimensions :</h3>
                     <ul>
                         <li>Hauteur:' . $_POST["hauteur"] . ' </li>
@@ -65,28 +75,27 @@ $message = '
                         <li>Gauche:<span style = "font-weight: bolder;color:' . $_POST["coulGauche"] . '">' . $_POST["coulGauche"] . '</span></li>
                         <li>Droite:<span style = "font-weight: bolder;color:' . $_POST["coulDroite"] . '">' . $_POST["coulDroite"] . '</span></li>         
                     </ul>
-
+                    
                     <h3>Matériel du cadre:</h3>
                     <ul>
                         <li>' . $_POST["type"] . '</li>
                     </ul>
-
+                    
                 </div>  
-
                 <div id="apercue">
                     <h3>Schéma en noir et blanc de l\'encadrement</h3>
                     <div id="schema" style=\'width:' . $_POST["lschema"] . 'px;\'>                    
-                        <img src= "' . $_POST["imgData"] . '" >    
+                        <img src= "'.$cheminCanv.'" >    
                     </div>
                 </div>                
-            </div> 
-            
+            </div>             
         </section>
     </body>
 </html>';
-
-//$headers = "From: $from_email";
-$headers = "Content-type: text/html";
+//les entetes du courriel
+$headers = "From: TP1-INF3005\r\n";
+$headers .= "Content-type: text/html";
+//envoi du courriel en format html
 if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
 //if (mail($_SESSION['email'], 'Facture', $message, $headers)) {
     echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#success'> (Envoyée avec succès par email)</span> </h2>", $message);
