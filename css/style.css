@@ -45,7 +45,13 @@ h3 {
     margin-top: 5px;
     float: left;
 }
-
+#criteres {
+    position: relative;
+    width: 30%;
+    height: 300px;
+    margin-top: 5px;
+    float: left;
+}
 #affichageRslt {
    /* border:1px solid grey;*/
     position: relative;
@@ -62,42 +68,14 @@ h3 {
 }
 
 #facture{  
-    border:1px solid grey;  
     padding: 5px;
-    margin-top: 20px;    
-    height: 600px;   
+    margin-top: 20px;        
+    width: 80%;
 }
 
 #affichage {
     display: inline-block;
     width: 25%;
-}
-
-figure {
-    padding:10px;    
-    border: 1px solid gray;
-    width: 845px;
-    margin: auto;
-}
-
-figcaption {
-    margin-top:5px;
-    padding:5px;
-    background:#f4f4f4;
-    border: 1px dotted gray;
-}
-
-figure img {
-    padding:5px;
-    background:#e3e7e3;   
-}
-
-figure img + img {
-    margin-left:10px;
-}
-
-figure a:link, figure a:visited {	
-    text-decoration: none;
 }
 
 .normal {
@@ -215,4 +193,17 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 #chargement {
     display:none; 
 
+}
+
+#apercue{
+    position: absolute;
+    border:1px solid grey;
+    width: 600px;
+    margin-left: 30%;
+}
+
+#schema{
+   /* border:1px solid grey;*/
+    width: 300px;   
+    margin: 20px auto;
 }

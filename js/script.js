@@ -13,12 +13,10 @@ var couleurDroit = "#ED1A59";
 var imgSrc = "img/no-image.jpg";
 
 $(document).ready(function (e) {
-
-
     dessinerCadre();
 
     $("#formPrincipal").submit(function () {        
-        canvasNoirEtBlanc();
+        canvasNoirEtBlanc();        
     });
    
     $("#rangeH").on("input", function () {
@@ -225,4 +223,5 @@ function canvasNoirEtBlanc() {
     var canvasData = canvas.toDataURL("image/png");
      //on remplit le champ caché par les données de l'image
     $("#imgData").val(canvasData);  
+    $("#lschema").val(canvas.width);
 }

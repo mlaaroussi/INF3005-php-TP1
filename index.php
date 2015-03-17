@@ -56,14 +56,15 @@ session_start();
                         <input type="color" name="coulBas" id="coulBas" value="#ED1A59"/>
                         <label class="couleurs" for="coulGauche" >Gauche: </label>
                         <input type="color" name="coulGauche" id="coulGauche" value="#ED1A59"/>
-                        <label class="couleurs" for="coulDroit" >Droit: </label>
-                        <input type="color" name="coulDroit" id="coulDroit" value="#ED1A59"/>
+                        <label class="couleurs" for="coulDroite" >Droit: </label>
+                        <input type="color" name="coulDroite" id="coulDroite" value="#ED1A59"/>
                         <h3>Matériel du cadre:</h3>
 
                         <input type="radio" name="type" value="Bois" checked/>Bois <img src="img/bois.jpg" width="48" height="48">
                         <input type="radio" name="type" value="Acier"/>Acier <img src="img/acier.jpg" width="48" height="48">                    
                         <input type="radio" name="type" value="Plastique"/>Plastique <img src="img/plastique.jpg" width="48" height="48">                    
                         <input type="hidden" name="imgData" id="imgData"/>
+                        <input type="hidden" name="lschema" id="lschema"/>
                         <br/>
                         <input type="submit" value="Produire facture"/>
                         <div id="message"></div>

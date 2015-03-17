@@ -1,9 +1,41 @@
 <?php
+
+//Vérification de session
 session_start();
- if (!isset($_SESSION['user'])) {
- header("location:login.html");
- }
-?>
+if (!isset($_SESSION['user'])) {
+    header("location:login.html");
+}
+//telechargement de l'image.
+if (isset($_FILES["fichierImg"]["type"])) {
+    $extensionsValides = array("jpeg", "jpg", "png", "gif");
+    $temporary = explode(".", $_FILES["fichierImg"]["name"]);
+    $extension = $temporary[1];
+    $nomSansExtension = $temporary[0];
+    if ((($_FILES["fichierImg"]["type"] == "image/png") || ($_FILES["fichierImg"]["type"] == "image/jpg") || ($_FILES["fichierImg"]["type"] == "image/jpeg") || ($_FILES["fichierImg"]["type"] == "image/gif") ) && ($_FILES["fichierImg"]["size"] < 10000000)// fichiers inférieurs a 10Mo peuvent être téléchargés.
+            && in_array($extension, $extensionsValides)) {
+        if ($_FILES["fichierImg"]["error"] > 0) {
+            echo "Code d'erreur: " . $_FILES["fichierImg"]["error"] . "<br/><br/>";
+        } else {
+            $source = $_FILES['fichierImg']['tmp_name']; // variable pour stocker le chemin du fichier source
+            if (file_exists("upload/" . $_FILES["fichierImg"]["name"])) {
+                $destination = "upload/" . $nomSansExtension . "-1." . $extension;
+                //echo "upload/" . $nomSansExtension . "-1." . $extension . "<br>";
+            } else {
+                $destination = "upload/" . $_FILES['fichierImg']['name'];
+            }
+            move_uploaded_file($source, $destination); //déplacer le fichier vers $destination
+            // echo "<span id='success'>Image téléchargée avec succès, (Nom du fichier : " . $_FILES["fichierImg"]["name"] . ")</span>";
+        }
+    } else {
+        echo "<span id='erreur'> Taille ou type de fichier non valide, seulement les images de taille inférieur à 10Mo sont acceptées <span>";
+    }
+}
+//Produire la facture  
+//date de livraison = date d'aujourd'hui plus 3 jours
+setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+$dateLivraison= ucwords((strftime("%A %e %B à %H h %M", mktime(10, 0, 0, date("m"), date("d") + 3, date("Y")))));
+//message de l'email
+$message = '
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -11,83 +43,55 @@ session_start();
         <meta charset="utf-8">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
     </head>
-    <body>       
-        <?php
-        if (isset($GLOBALS["HTTP_RAW_POST_DATA"])) {
-            $imageData = $GLOBALS['HTTP_RAW_POST_DATA'];
-            echo "imagedata1: " . $imageData;
-            $filteredData = substr($imageData, strpos($imageData, ",") + 1);
-            $unencodedData = base64_decode($filteredData);
-            $fp = fopen('upload/canvas.png', 'wb');
-            fwrite($fp, $unencodedData);
-            fclose($fp);
-        }
-        if (isset($_FILES["fichierImg"]["type"])) {
-            $extensionsValides = array("jpeg", "jpg", "png", "gif");
-            $temporary = explode(".", $_FILES["fichierImg"]["name"]);
-            $extension = $temporary[1];
-            $nomSansExtension = $temporary[0];
-            if ((($_FILES["fichierImg"]["type"] == "image/png") || ($_FILES["fichierImg"]["type"] == "image/jpg") || ($_FILES["fichierImg"]["type"] == "image/jpeg") || ($_FILES["fichierImg"]["type"] == "image/gif") ) && ($_FILES["fichierImg"]["size"] < 10000000)// fichiers inférieurs a 10Mo peuvent être téléchargés.
-                    && in_array($extension, $extensionsValides)) {
-                if ($_FILES["fichierImg"]["error"] > 0) {
-                    echo "Code d'erreur: " . $_FILES["fichierImg"]["error"] . "<br/><br/>";
-                } else {
-                    $source = $_FILES['fichierImg']['tmp_name']; // variable pour stocker le chemin du fichier source
-                    if (file_exists("upload/" . $_FILES["fichierImg"]["name"])) {
-                        $destination = "upload/" . $nomSansExtension . "-1." . $extension;
-                        //echo "upload/" . $nomSansExtension . "-1." . $extension . "<br>";
-                    } else {
-                        $destination = "upload/" . $_FILES['fichierImg']['name'];
-                    }
-                    move_uploaded_file($source, $destination); //déplacer le fichier vers $destination
-                    // echo "<span id='success'>Image téléchargée avec succès, (Nom du fichier : " . $_FILES["fichierImg"]["name"] . ")</span>";
-                }
-            } else {
-                echo "<span id='erreur'> Taille ou type de fichier non valide, seulement les images de taille inférieur à 10Mo sont acceptées <span>";
-            }
-        }
-        ?>
+    <body>             
         <section>
             <h2> Facture </h2>
-
+            <h3>Date de livraison: <span style="color: #464646;">'.$dateLivraison.' </span> </h3>
             <div id="facture">    
-                <div id="choixCriteres">
+                <div id="criteres">
                     <h3>Dimensions :</h3>
                     <ul>
-                        <li>Hauteur:<?php echo $_POST["hauteur"] . "cm" ?> </li>
-                        <li>Largeur: <?php echo $_POST["largeur"] . "cm" ?>  </li>
-                        <li>Profondeur: <?php echo $_POST["profondeur"] . "cm" ?> </li>
-                        <li>Largeur cadre: <?php echo $_POST["lCadre"] . "cm" ?> </li>
-                        <li>Marge: <?php echo $_POST["marge"] . "cm" ?> </li>         
+                        <li>Hauteur:' . $_POST["hauteur"] . ' </li>
+                        <li>Largeur: ' . $_POST["largeur"] . 'cm </li>
+                        <li>Profondeur: ' . $_POST["profondeur"] . 'cm</li>
+                        <li>Largeur cadre: ' . $_POST["lCadre"] . 'cm </li>
+                        <li>Marge: ' . $_POST["marge"] . 'cm</li>         
                     </ul>
 
                     <h3>Couleurs des cotés du cadre:</h3>
-                    <ul>
-                        <li>Haut:<?php echo $_POST["coulHaut"] ?> </li>
-                        <li>Bas: <?php echo $_POST["coulBas"] ?></li>
-                        <li>Gauche: <?php echo $_POST["coulGauche"] ?></li>
-                        <li>Droite: <?php echo $_POST["coulDroite"] ?></li>         
+                     <ul>
+                        <li>Haut:<span style = "font-weight: bolder;color:' . $_POST["coulHaut"] . '">' . $_POST["coulHaut"] . '</span> </li>
+                        <li>Bas:<span style = "font-weight: bolder;color:' . $_POST["coulBas"] . '"> ' . $_POST["coulBas"] . '</span></li>
+                        <li>Gauche:<span style = "font-weight: bolder;color:' . $_POST["coulGauche"] . '">' . $_POST["coulGauche"] . '</span></li>
+                        <li>Droite:<span style = "font-weight: bolder;color:' . $_POST["coulDroite"] . '">' . $_POST["coulDroite"] . '</span></li>         
                     </ul>
 
                     <h3>Matériel du cadre:</h3>
                     <ul>
-                        <li><?php echo $_POST["type"] ?></li>
+                        <li>' . $_POST["type"] . '</li>
                     </ul>
 
                 </div>  
 
                 <div id="apercue">
-                    <?php
-                    $imageData = $_POST["imgData"];
-                    ?>
-                    <h3>Schéma en noir et blanc de l'encadrement</h3>
-
-                    <img id="aperc" src= <?php echo $imageData ?> >                                           
+                    <h3>Schéma en noir et blanc de l\'encadrement</h3>
+                    <div id="schema" style=\'width:' . $_POST["lschema"] . 'px;\'>                    
+                        <img src= "' . $_POST["imgData"] . '" >    
+                    </div>
                 </div>                
-                            
             </div> 
-             <a href="mailto:votre_email?subject= sujet_du_message&body= corps_du_message">Envoyer par email</a> 
+            
         </section>
-
     </body>
-</html>
+</html>';
+
+//$headers = "From: $from_email";
+$headers = "Content-type: text/html";
+if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
+//if (mail($_SESSION['email'], 'Facture', $message, $headers)) {
+    echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#success'> (Envoyée avec succès par email)</span> </h2>", $message);
+} else {
+    echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#erreur'>  (Problème d'envoi par email) </span>  </h2>", $message);
+}
+
+
