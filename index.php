@@ -1,11 +1,15 @@
-
+<?php
+session_start();
+ if (!isset($_SESSION['user'])) {
+ header("location:login.html");
+ }
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <title>INF3005-TP1</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
         <script type="text/javascript" src="js/script.js"></script>
     </head>

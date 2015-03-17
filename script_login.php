@@ -27,8 +27,8 @@ $count = mysql_num_rows($result);
 
 if ($count == 1) {
 // Register $login, $pass and redirect to file "login_success.php"
-    session_register("login");
-    session_register("pass");
+    session_start();
+     $_SESSION['user'] = $login;
     header('location:index.php');
 } else {
     header('location:erreur_login.html');

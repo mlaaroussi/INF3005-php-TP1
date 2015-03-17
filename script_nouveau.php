@@ -35,15 +35,15 @@ $stmt->execute();
         <div class="auth">
 
             <div id="legend">
-                <?php echo($_POST['prenom']." ".$_POST['nom']); ?> à été ajouté(e) avec succès ! Veuillez vous identifier pour continuer : 
+                <span id="success"> <?php echo($_POST['prenom']." ".$_POST['nom']); ?> à été ajouté(e) avec succès ! Veuillez vous identifier pour continuer : </span> 
             </div>
 
             <form id="loginForm" method="post" action="script_login.php">
                 <label class="normal" for="login">Login:</label>
-                <input type="text" name="login">
+                <input type="text" name="login" required/>
 
                 <label class="normal" for="pass">Mot de passe: </label>
-                <input type="password" name="pass">
+                <input type="password" name="pass" required/>
 
                 <span id="connexion_msg"> </span>
                 <br>
