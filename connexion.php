@@ -6,7 +6,8 @@ $host = "localhost";
 $username = "root";
 $password = "mohamed";
 $db_name = "CADRES";
-$tbl_name = "User";
+$tbl_user = "user";
+$tbl_commande = "commande";
 
 // Connection au serveur Mysql et choix de la base.
 mysql_connect("$host", "$username", "$password")or die("Porblème de connexion");

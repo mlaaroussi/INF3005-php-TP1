@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_GET['msg'])){
+    $msg =$_GET['msg'];
+    if($msg=="existedeja"){
+        $affichage="Le nom d'usager est deja choisi, Veuillez choisir un autre.";
+    }     
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,10 +34,11 @@
     </head>
     <body>
 
-        <div id="nvCompte">
-
+        <div id="nvCompte">           
             <form id="creerForm" action="script_nouveau.php" method="post" onSubmit="return validation(this)">
-                <h2> Créer nouveau compte </h2>
+                <h2> Créer nouveau compte</h2>
+                <span id="erreur"><?php echo $affichage ?></span>
+                <br/>
                 <label class="normal" for="nom">Nom:</label><br />
                 <input name="nom" type="text" required placeholder = "Nom" /><br />
 

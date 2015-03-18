@@ -1,7 +1,18 @@
 <?php
+
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location:login.html");
+    header("location:index.php");
+}
+if(isset($_GET['msg'])){
+    $msg =$_GET['msg'];
+    if($msg=="cmptok"){
+        $affichage="Compte modifié avec succès";
+    }
+    if($msg=="cmptnok"){
+        $affichage="Porbleme de modification Compte!";
+    }
+  
 }
 ?>
 <!DOCTYPE html>
@@ -17,12 +28,14 @@ if (!isset($_SESSION['user'])) {
         <div class="auth">
    
             <div id="legend">
-                Menu principal
+                Menu principal 
+                <br/>
+                <span id="success"><?php echo $affichage ?></span>
             </div>
             <ul>
                 <li id="nvCmd"><a href="commande.php">Nouvelle commande</a></li>                
-                <li id="mdfCmd"><a href="">Modifier commande</a></li>
-                <li id="mdfCmpt"><a href="modifierCmpt.php">Modifier compte</a></li>
+                <li id="mdfCmd"><a href="modifierCmd.php">Modifier commande</a></li>
+                <li id="mdfCmpt"><a href="modifierCmpt.php">Modifier compte</a></li> 
                 <li id="quitter"><a href="quitter.php">Quitter</a></li>
             </ul>
         </div>

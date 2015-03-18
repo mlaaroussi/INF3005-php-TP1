@@ -1,59 +1,32 @@
 <?php
 
-try
-{
-	$bdd = new PDO('mysql:host=localhost;dbname=CADRES', 'root', 'mohamed');
-	$bdd->exec("SET CHARACTER SET utf8");
+include('connexion.php');
+
+$nom = $_POST['nom'];
+$prenom = $_POST['prenom'];
+$usager = $_POST['usager'];
+$pass = $_POST['pass'];
+$tel = $_POST['tel'];
+$courriel = $_POST['courriel'];
+$adresse = $_POST['adresse'];
+
+//on vérifie si un utilisateur existe avec le même nom d'usager
+$selectSql = "SELECT * FROM $tbl_user WHERE usager='$usager'";
+$rsltSelect = mysql_query($selectSql);
+$count = mysql_num_rows($rsltSelect);
+
+if ($count == 0) {
+// On met à jour les modifications
+    $sql = "INSERT INTO $tbl_user(nom,prenom,usager,pass,tel,courriel,adresse) VALUES ('$nom', '$prenom','$usager' ,'$pass' , '$tel', '$courriel', '$adresse')";
+    $result = mysql_query($sql);
+
+    if ($result) {
+        header('location:index.php?msg=ajoutok');
+    } else {
+        header('location:erreur_tech.html');
+    }
+} else {
+    header('location:nouveau.php?msg=existedeja');
 }
-catch(Exception $e)
-{
-    die('Erreur : '.$e->getMessage());
-}
 
-$stmt = $bdd->prepare("INSERT INTO User (nom,prenom,usager,pass,tel,courriel,adresse) VALUES (:nom,:prenom,:usager,:pass,:tel,:courriel,:adresse)");
-$stmt->bindParam(':nom', $_POST['nom']);
-$stmt->bindParam(':prenom', $_POST['prenom']);
-$stmt->bindParam(':usager', $_POST['usager']);
-$stmt->bindParam(':pass', $_POST['pass']);
-$stmt->bindParam(':tel', $_POST['tel']);
-$stmt->bindParam(':courriel', $_POST['courriel']);
-$stmt->bindParam(':adresse', $_POST['adresse']);
-$stmt->execute();
-
-?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">					
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <title>Connexion</title>
-    </head>
-
-    <body>
-
-        <div class="auth">
-
-            <div id="legend">
-                <span id="success"> <?php echo($_POST['prenom']." ".$_POST['nom']); ?> à été ajouté(e) avec succès ! Veuillez vous identifier pour continuer : </span> 
-            </div>
-
-            <form id="loginForm" method="post" action="script_login.php">
-                <label class="normal" for="login">Login:</label>
-                <input type="text" name="login" required/>
-
-                <label class="normal" for="pass">Mot de passe: </label>
-                <input type="password" name="pass" required/>
-
-                <span id="connexion_msg"> </span>
-                <br>
-                <a href="nouveau.html"> Créer nouveau compte</a>
-
-                <input type="submit" value="Se connecter">                                
-                <?php ?>
-            </form>
-        </div>
-
-    </body>
-</html>
-
+mysql_close();

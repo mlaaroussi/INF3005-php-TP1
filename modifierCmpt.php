@@ -1,46 +1,65 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("location:login.html");
+     header("location:index.php");
 }
 
 include('connexion.php');
 // username and password sent from form 
-$login = $_SESSION['user'];
+$idUser = $_SESSION['user'];
 
-//Pour eviter les injections sql
-$login = stripslashes($login);
-$pass = stripslashes($pass);
-$login = mysql_real_escape_string($login);
-$pass = mysql_real_escape_string($pass);
-$sql = "SELECT * FROM $tbl_name WHERE usager='$login'";
+$sql = "SELECT * FROM $tbl_user WHERE id = $idUser";
 $rslt = mysql_query($sql);
 
-while($data = mysql_fetch_assoc($rslt)) { 
-    $nom=$data['nom'];
-    $prenom=$data['prenom'];
-    $pass=$data['pass'];
-    $tel=$data['tel'];
-    $courriel=$data['courriel'];
-    $adresse=$data['adresse'];                          
-} 
+$data = mysql_fetch_assoc($rslt);
 
-mysql_close(); 
+$nom = $data['nom'];
+$prenom = $data['prenom'];
+$usager = $data['usager'];
+$pass = $data['pass'];
+$tel = $data['tel'];
+$courriel = $data['courriel'];
+$adresse = $data['adresse'];
 
+mysql_close();
 
+if(isset($_GET['msg'])){
+    $msg =$_GET['msg'];
+    if($msg=="existedeja"){
+        $affichage="Le nom d'usager est deja choisi, Veuillez choisir un autre.";
+    }     
+}
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">					
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <title>Connexion</title>
+        <title>Modifier compte</title>
+         <script language="JavaScript">
+            function validation(f) {
+                if (f.pass.value != f.confirmPass.value) {
+                    alert('Les mots de passe ne sont pas identiques !');
+                    f.pass.focus();
+                    return false;
+                }
+                else if (f.pass.value == f.confirmPass.value) {
+                    return true;
+                }
+                else {
+                    f.pass.focus();
+                    return false;
+                }
+            }
+        </script>
     </head>
 
     <body>
-<div id="nvCompte">
-            <form id="creerForm" action="script_nouveau.php" method="post" onSubmit="return validation(this)">
+        <div id="nvCompte">
+            <form id="creerForm" action="script_modifierCmpt.php" method="post" onSubmit="return validation(this)">
                 <h2> Modifier compte </h2>
+                <span id="erreur"><?php echo $affichage ?></span>
+                <br/>
                 <label class="normal" for="nom">Nom:</label><br />
                 <input name="nom" type="text" required value="<?php echo $nom ?>" /><br />
 
@@ -48,7 +67,7 @@ mysql_close();
                 <input name="prenom" type="text" required value="<?php echo $prenom ?>"/><br />
 
                 <label class="normal" for="usager">Choisissez votre nom d'usager:</label><br />
-                <input name="usager" type="text" required value="<?php echo $login ?>"/><br />
+                <input name="usager" type="text" required value="<?php echo $usager ?>"/><br />
 
                 <label class="normal" for="pass">Créez un mot de passe:</label><br />
                 <input name="pass" type="password" required  value="<?php echo $password ?>"/><br />
@@ -64,11 +83,11 @@ mysql_close();
 
                 <label class="normal" for="adresse">Adresse:</label><br />
                 <textarea name="adresse" required ><?php echo $adresse ?></textarea><br />                                    
-
+                <span id="erreur"></span><br />
                 <input type="submit" value="Modifier"/>               
             </form>
         </div>		
     </body>
 
-    </body>
+</body>
 </html>

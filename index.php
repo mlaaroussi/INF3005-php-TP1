@@ -1,3 +1,14 @@
+<?php
+
+if(isset($_GET['msg'])){
+    $msg =$_GET['msg'];
+    if($msg=="ajoutok"){
+        $affichage="<span id='success'> Compte ajouté avec succès ! Veuillez vous identifier pour continuer </span>";
+    }     
+} else {
+    $affichage="Authentification";
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,9 +22,9 @@
         <div class="auth">
 
             <div id="legend">
-                Authentification
+              <?php echo  $affichage ?>
             </div>
-
+            
             <form id="loginForm" method="post" action="script_login.php">
                 <label class="normal" for="login">Login:</label>
                 <input type="text" name="login" required placeholder = "Login">
@@ -23,7 +34,7 @@
 
                 <span id="connexion_msg"> </span>
                 <br>
-                <a href="nouveau.html"> Créer nouveau compte</a>
+                <a href="nouveau.php"> Créer nouveau compte</a>
 
                 <input type="submit" value="Se connecter">                                
                 
