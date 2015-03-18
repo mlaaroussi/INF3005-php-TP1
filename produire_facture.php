@@ -18,9 +18,9 @@ if (isset($_FILES["fichierImg"]["type"])) {
             echo "Code d'erreur: " . $_FILES["fichierImg"]["error"] . "<br/><br/>";
         } else {
             $source = $_FILES['fichierImg']['tmp_name']; // variable pour stocker le chemin du fichier source
-            $imgNom= "img_".$nomUnique.".".$extension;
-            $destination = "upload/" .$imgNom;
-            
+            $imgNom = "img_" . $nomUnique . "." . $extension;
+            $destination = "upload/" . $imgNom;
+
             move_uploaded_file($source, $destination); //déplacer le fichier vers $destination
             // echo "<span id='success'>Image téléchargée avec succès, (Nom du fichier : " . $_FILES["fichierImg"]["name"] . ")</span>";
         }
@@ -29,20 +29,21 @@ if (isset($_FILES["fichierImg"]["type"])) {
     }
 }
 //convertir les donneés du canvas noir et blanc en png
-        $canvasData= $_POST['imgData'];
-        $canvasData = substr($canvasData, strpos($canvasData, ",") + 1);        
-        $decodedData = base64_decode($canvasData);
-        $canvasNom= "cnv_".$nomUnique.".png";
-        $fp = fopen("upload/".$canvasNom, 'wb');
-        fwrite($fp, $decodedData);
-        fclose($fp);
+$canvasData = $_POST['imgData'];
+$canvasData = substr($canvasData, strpos($canvasData, ",") + 1);
+$decodedData = base64_decode($canvasData);
+$canvasNom = "cnv_" . $nomUnique . ".png";
+$fp = fopen("upload/" . $canvasNom, 'wb');
+fwrite($fp, $decodedData);
+fclose($fp);
 //$cheminCanv="http://moka.labunix.uqam.ca/~ch791163/PHP/Tp1_php/upload/".$canvasNom;
-$cheminCanv="upload/".$canvasNom;
+$cheminCanv = "upload/" . $canvasNom;
 
 //Produire le message de la facture et envoi d'email  
 //date de livraison = date d'aujourd'hui plus 3 jours
 setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-$dateLivraison= ucwords((strftime("%A %e %B à %H h %M", mktime(10, 0, 0, date("m"), date("d") + 3, date("Y")))));
+$dateLivraison =  mktime(10, 0, 0, date("m"), date("d") + 3, date("Y"));
+$strDateLivraison = ucwords((strftime("%A %e %B à %H h %M",$dateLivraison)));
 //message de l'email
 $message = '
 <!DOCTYPE html>
@@ -55,7 +56,7 @@ $message = '
     <body>             
         <section>
             <h2> Facture </h2>
-            <h3>Date de livraison: <span style="color: #464646;">'.$dateLivraison.' </span> </h3>
+            <h3>Date de livraison: <span style="color: #464646;">' . $strDateLivraison . ' </span> </h3>
             <div id="facture">    
                 <div id="criteres">
                 
@@ -85,14 +86,14 @@ $message = '
                 <div id="apercue">
                     <h3>Schéma en noir et blanc de l\'encadrement</h3>
                     <div id="schema" style=\'width:' . $_POST["lschema"] . 'px;\'>                    
-                        <img src= "'.$cheminCanv.'" >    
+                        <img src= "' . $cheminCanv . '" >    
                     </div>
                 </div>                
             </div>             
         </section>
     </body>
 </html>';
-//les entetes du courriel
+//Les entetes du courriel
 $headers = "From: TP1-INF3005\r\n";
 $headers .= "Content-type: text/html";
 //envoi du courriel en format html
@@ -102,5 +103,12 @@ if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
 } else {
     echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#erreur'>  (Problème d'envoi par email) </span>  </h2>", $message);
 }
+//enregistrer la commade dans la base
+include('connexion.php');
+$sql="insert into commande (usager,hauteur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)"; 
+$sql.=" values ('".$_SESSION['user']."',". $_POST["hauteur"].",". $_POST["largeur"]."," . $_POST["lCadre"] .",". $_POST["marge"] .",'". $_POST["coulHaut"] ."','". $_POST["coulBas"] ."','". $_POST["coulGauche"] . "','" . $_POST["coulDroite"] ."','". $_POST["type"] ."','".$imgNom."',now(),'".date("Y-m-d H:i:s",$dateLivraison)."')";
+
+mysql_query($sql);
+mysql_close();
 
 

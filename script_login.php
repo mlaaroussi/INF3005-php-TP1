@@ -1,15 +1,5 @@
 <?php
-
-$host = "localhost";
-$username = "root";
-$password = "mohamed";
-$db_name = "CADRES";
-$tbl_name = "User";
-
-// Connection au serveur Mysql et choix de la base.
-mysql_connect("$host", "$username", "$password")or die("Porblème de connexion");
-mysql_select_db("$db_name") or die("Porblème de choix de la base");
-
+include('connexion.php');
 // username and password sent from form 
 $login = $_POST['login'];
 $pass = $_POST['pass'];
@@ -33,3 +23,4 @@ if ($count == 1) {
 } else {
     header('location:erreur_login.html');
 }
+ mysql_close();
