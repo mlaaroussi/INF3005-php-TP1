@@ -59,7 +59,7 @@ $message = '
             <ul>
                 <li><a href="accueil.php">Menu principal</a></li>
                 <li><a href="">Modifier compte</a></li>
-                <li><a href="">Modifier commande</a></li>
+                <li><a href="modifierCmd.php">Modifier commande</a></li>
                 <li><a href="quitter.php">Quitter</a></li>
             </ul>
         </header>
@@ -114,8 +114,8 @@ if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
 }
 //enregistrer la commade dans la base
 include('connexion.php');
-$sql = "insert into $tbl_commande (id_user,hauteur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
-$sql.=" values (" . $_SESSION['user'] . "," . $_POST["hauteur"] . "," . $_POST["largeur"] . "," . $_POST["lCadre"] . "," . $_POST["marge"] . ",'" . $_POST["coulHaut"] . "','" . $_POST["coulBas"] . "','" . $_POST["coulGauche"] . "','" . $_POST["coulDroite"] . "','" . $_POST["type"] . "','" . $imgNom . "',now(),'" . date("Y-m-d H:i:s", $dateLivraison) . "')";
+$sql = "insert into $tbl_commande (id_user,hauteur,profondeur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
+$sql.=" values (" . $_SESSION['user'] . "," . $_POST["hauteur"] . "," . $_POST["largeur"] . "," . $_POST["profondeur"] . "," . $_POST["lCadre"] . "," . $_POST["marge"] . ",'" . $_POST["coulHaut"] . "','" . $_POST["coulBas"] . "','" . $_POST["coulGauche"] . "','" . $_POST["coulDroite"] . "','" . $_POST["type"] . "','" . $imgNom . "',now(),'" . date("Y-m-d H:i:s", $dateLivraison) . "')";
 
 mysql_query($sql);
 mysql_close();
