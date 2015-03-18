@@ -38,6 +38,16 @@ h3 {
     font-weight: bold;
 }
 
+header ul {
+    margin:0px; 
+    padding:0px;
+}
+
+header ul li {
+    display:inline; 
+    margin:10px;
+}
+
 #choixCriteres {
     position: relative;
     width: 48%;
@@ -206,4 +216,24 @@ input[type="submit"]:hover,input[type="reset"]:hover {
    /* border:1px solid grey;*/
     width: 300px;   
     margin: 20px auto;
+}
+
+#nvCmd {
+    list-style-image: url('../img/nouv_cmd.png');
+    margin: 10px;
+}
+
+#mdfCmd {
+    list-style-image: url('../img/modf_cmd.png');    
+    margin: 10px;
+}
+
+#mdfCmpt {
+    list-style-image: url('../img/modf_cmpt.png');
+    margin: 10px;
+}
+
+#quitter {
+    list-style-image: url('../img/quitter.png');
+    margin: 10px;
 }

@@ -1,8 +1,8 @@
 <?php
 session_start();
- if (!isset($_SESSION['user'])) {
- header("location:login.html");
- }
+if (!isset($_SESSION['user'])) {
+    header("location:login.html");
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,6 +18,12 @@ session_start();
 
         <header>
             <h1>Composition et achat de cadres pour les photos en ligne</h1>
+            <ul>
+                <li><a href="accueil.php">Menu principal</a></li>
+                <li><a href="">Modifier compte</a></li>
+                <li><a href="">Modifier commande</a></li>
+                <li><a href="quitter.php">Quitter</a></li>
+            </ul>
         </header>
 
         <section>            

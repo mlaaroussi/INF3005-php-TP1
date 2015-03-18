@@ -1,4 +1,5 @@
 <?php
+
 include('connexion.php');
 // username and password sent from form 
 $login = $_POST['login'];
@@ -18,9 +19,9 @@ $count = mysql_num_rows($result);
 if ($count == 1) {
 // Register $login, $pass and redirect to file "login_success.php"
     session_start();
-     $_SESSION['user'] = $login;
-    header('location:index.php');
+    $_SESSION['user'] = $login;
+    header('location:accueil.php');
 } else {
     header('location:erreur_login.html');
 }
- mysql_close();
+mysql_close();

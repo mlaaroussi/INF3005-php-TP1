@@ -42,8 +42,8 @@ $cheminCanv = "upload/" . $canvasNom;
 //Produire le message de la facture et envoi d'email  
 //date de livraison = date d'aujourd'hui plus 3 jours
 setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-$dateLivraison =  mktime(10, 0, 0, date("m"), date("d") + 3, date("Y"));
-$strDateLivraison = ucwords((strftime("%A %e %B à %H h %M",$dateLivraison)));
+$dateLivraison = mktime(10, 0, 0, date("m"), date("d") + 3, date("Y"));
+$strDateLivraison = ucwords((strftime("%A %e %B à %H h %M", $dateLivraison)));
 //message de l'email
 $message = '
 <!DOCTYPE html>
@@ -53,7 +53,16 @@ $message = '
         <meta charset="utf-8">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
     </head>
-    <body>             
+    <body>
+    <header>
+            <h1>Composition et achat de cadres pour les photos en ligne</h1>
+            <ul>
+                <li><a href="accueil.php">Menu principal</a></li>
+                <li><a href="">Modifier compte</a></li>
+                <li><a href="">Modifier commande</a></li>
+                <li><a href="quitter.php">Quitter</a></li>
+            </ul>
+        </header>
         <section>
             <h2> Facture </h2>
             <h3>Date de livraison: <span style="color: #464646;">' . $strDateLivraison . ' </span> </h3>
@@ -105,8 +114,8 @@ if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
 }
 //enregistrer la commade dans la base
 include('connexion.php');
-$sql="insert into commande (usager,hauteur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)"; 
-$sql.=" values ('".$_SESSION['user']."',". $_POST["hauteur"].",". $_POST["largeur"]."," . $_POST["lCadre"] .",". $_POST["marge"] .",'". $_POST["coulHaut"] ."','". $_POST["coulBas"] ."','". $_POST["coulGauche"] . "','" . $_POST["coulDroite"] ."','". $_POST["type"] ."','".$imgNom."',now(),'".date("Y-m-d H:i:s",$dateLivraison)."')";
+$sql = "insert into commande (usager,hauteur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
+$sql.=" values ('" . $_SESSION['user'] . "'," . $_POST["hauteur"] . "," . $_POST["largeur"] . "," . $_POST["lCadre"] . "," . $_POST["marge"] . ",'" . $_POST["coulHaut"] . "','" . $_POST["coulBas"] . "','" . $_POST["coulGauche"] . "','" . $_POST["coulDroite"] . "','" . $_POST["type"] . "','" . $imgNom . "',now(),'" . date("Y-m-d H:i:s", $dateLivraison) . "')";
 
 mysql_query($sql);
 mysql_close();
