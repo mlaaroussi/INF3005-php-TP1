@@ -58,8 +58,6 @@ $message = '
             <h1>Composition et achat de cadres pour les photos en ligne</h1>
             <ul>
                 <li><a href="accueil.php">Menu principal</a></li>
-                <li><a href="">Modifier compte</a></li>
-                <li><a href="modifierCmd.php">Modifier commande</a></li>
                 <li><a href="quitter.php">Quitter</a></li>
             </ul>
         </header>

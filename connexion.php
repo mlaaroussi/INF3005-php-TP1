@@ -11,5 +11,5 @@ $tbl_commande = "commande";
 
 // Connection au serveur Mysql et choix de la base.
 mysql_connect("$host", "$username", "$password")or die("Porblème de connexion");
-mysql_select_db("$db_name") or die("Porblème base de données");
+mysql_select_db("$db_name") or die("Problème base de données");
 

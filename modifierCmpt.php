@@ -57,7 +57,7 @@ if(isset($_GET['msg'])){
     <body>
         <div id="nvCompte">
             <form id="creerForm" action="script_modifierCmpt.php" method="post" onSubmit="return validation(this)">
-                <h2> Modifier compte </h2>
+                <h2> Modifier les informations personnelles </h2>
                 <span id="erreur"><?php echo $affichage ?></span>
                 <br/>
                 <label class="normal" for="nom">Nom:</label><br />

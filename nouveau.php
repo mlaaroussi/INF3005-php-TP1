@@ -10,7 +10,7 @@ if(isset($_GET['msg'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Créer nouveau compte</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         
