@@ -54,13 +54,13 @@ $message = '
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
     </head>
     <body>
-    <header>
-            <h1>Composition et achat de cadres pour les photos en ligne</h1>
-            <ul>
-                <li><a href="accueil.php">Menu principal</a></li>
-                <li><a href="quitter.php">Quitter</a></li>
-            </ul>
-        </header>
+         <div id="header">
+            <div id="titre"> Composition et achat de cadres pour les photos en ligne</div>
+                <ul>
+                    <li><a href="accueil.php">Menu principal</a></li>
+                    <li ><a href="quitter.php">Quitter </a> [ '. $_SESSION['login'].' ]</li>
+                </ul> 
+            </div> 
         <section>
             <h2> Facture </h2>
             <h3>Date de livraison: <span style="color: #464646;">' . $strDateLivraison . ' </span> </h3>

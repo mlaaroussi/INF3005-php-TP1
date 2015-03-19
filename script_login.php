@@ -19,6 +19,7 @@ $count = mysql_num_rows($rslt);
 if ($count == 1) {
     session_start();
     $_SESSION['user'] = $data['id'];
+    $_SESSION['login'] = $data['usager'];
     header('location:accueil.php');
 } else {
     header('location:erreur_login.html');

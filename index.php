@@ -26,7 +26,7 @@ if(isset($_GET['msg'])){
             </div>
             
             <form id="loginForm" method="post" action="script_login.php">
-                <label class="normal" for="login">Login:</label>
+                <label class="normal" for="login">Nom d'usager:</label>
                 <input type="text" name="login" required placeholder = "Login">
 
                 <label class="normal" for="pass">Mot de passe: </label>

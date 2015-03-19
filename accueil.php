@@ -21,17 +21,18 @@ if (isset($_GET['msg'])) {
         <title>Connexion</title>
     </head>
     <body>
-        <div class="auth">
+        <div class="menupr">
             <div id="legend">
-                Menu principal 
+                <h2>Menu principal</h2> 
+                Bienvenu, Vous ête connecté en tant que: <span id="success"><?php echo $_SESSION['login'] ?></span>
                 <br/>
                 <span id="success"><?php echo $affichage ?></span>
             </div>
             <ul>
-                <li id="nvCmd"><a href="commande.php">Nouvelle commande</a></li>                
-                <li id="mdfCmd"><a href="afficherCmd.php">Afficher la lisete des commandes</a></li>
-                <li id="mdfCmpt"><a href="modifierCmpt.php">Modifier les informations personnelles</a></li> 
-                <li id="quitter"><a href="quitter.php">Quitter</a></li>
+                <li id="nvCmd"><a href="commande.php"> Nouvelle commande</a></li>                
+                <li id="mdfCmd"><a href="afficherCmd.php"> Afficher la liste des commandes</a></li>
+                <li id="mdfCmpt"><a href="modifierCmpt.php"> Modifier les informations personnelles</a></li> 
+                <li id="quitter"><a href="quitter.php"> Quitter </a></li>
             </ul>
         </div>
     </body>

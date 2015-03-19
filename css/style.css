@@ -6,10 +6,11 @@
 body {
     font-family: Verdana, sans-serif; 
     font-size: 12px;
-    color: #464646;	
+    color: #464646;
+    margin: 0;
 }
 
-header, article, footer, aside {
+article, footer, aside {
     border:1px solid grey;
     margin:5px;
     padding:8px;
@@ -38,14 +39,32 @@ h3 {
     font-weight: bold;
 }
 
-header ul {
-    margin:0px; 
-    padding:0px;
+#header {
+    height: 30px;
+    padding: 10px;    
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-header ul li {
-    display:inline; 
-    margin:10px;
+#titre {
+    float: left;
+    color: #38477E;
+    font-weight: bolder;
+    font-size: 16px;   
+}
+
+#header ul {
+    position: absolute;
+    right: 5px;
+    padding: 0;
+    margin: 0;
+
+}
+
+
+#header ul li {
+    display: inline;
+    margin:15px;
 }
 
 #choixCriteres {
@@ -63,7 +82,7 @@ header ul li {
     float: left;
 }
 #affichageRslt {
-   /* border:1px solid grey;*/
+    /* border:1px solid grey;*/
     position: relative;
     width: 50%;
     height: 558px;
@@ -105,19 +124,32 @@ label.couleurs {
     margin-left: 10px;
 
 }
-
 div.auth {
     margin: auto;
     margin-top: 90px;	
     background-color: #fff;
     padding: 30px;
+    height: 250px;
+    width: 300px;
     border: solid;
     border-width: 1px;
     border-color: #e3e3e3;
-    height: 250px;
-    width: 300px;
-    box-shadow:3px 5px 20px 3px;	
     border-radius: 5px;
+    box-shadow:3px 5px 20px 3px;
+}
+
+div.menupr {
+    margin: auto;
+    margin-top: 90px;	
+    background-color: #fff;
+    padding: 30px;    
+    height: 300px;
+    width: 35%;
+    border: solid;
+    border-width: 1px;
+    border-color: #e3e3e3;    	
+    border-radius: 5px;
+    box-shadow:3px 5px 20px 3px;
 }
 
 
@@ -193,11 +225,13 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 
 #success {
     color:green;
+    font-weight: bold;
 }
 
 #erreur {
     color:red;
     display: block;
+    font-weight: bold;
 }
 
 #chargement {
@@ -213,7 +247,7 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 }
 
 #schema{
-   /* border:1px solid grey;*/
+    /* border:1px solid grey;*/
     width: 300px;   
     margin: 20px auto;
 }
@@ -239,29 +273,29 @@ input[type="submit"]:hover,input[type="reset"]:hover {
 }
 
 table {
-	border-collapse: collapse;
-	border: solid;
-        border-color: #3333ff;
-	border-width: 1px;
-	margin: auto;
-	width: 80%;
-	text-align: center;
-	margin-bottom: 40px;
-	margin-top: 50px;
+    border-collapse: collapse;
+    border: solid;
+    border-color: #3333ff;
+    border-width: 1px;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 50px;
 }
 
 tr th {
     background-color: #1965f3;
-	color: #FFFFFF;
-	border: solid;
-        border-color:#464646;
-	border-width: 1px;
-	padding: 5px;
+    color: #FFFFFF;
+    border: solid;
+    border-color:#464646;
+    border-width: 1px;
+    padding: 5px;
 }
 
 tr td {
     border: solid;
-        border-color:#464646;
-	border-width: 1px;
-	padding: 5px;
+    border-color:#464646;
+    border-width: 1px;
+    padding: 5px;
 }

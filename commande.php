@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-     header("location:index.php");
+    header("location:index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -16,13 +16,13 @@ if (!isset($_SESSION['user'])) {
 
     <body>
 
-        <header>
-            <h1>Composition et achat de cadres pour les photos en ligne</h1>
+        <div id="header">
+            <div id="titre"> Composition et achat de cadres pour les photos en ligne</div>
             <ul>
                 <li><a href="accueil.php">Menu principal</a></li>
-                <li><a href="quitter.php">Quitter</a></li>
-            </ul>
-        </header>
+                <li ><a href="quitter.php">Quitter </a> [ <?php echo $_SESSION['login'] ?> ]</li>
+            </ul> 
+        </div>
 
         <section>            
             <form id="formPrincipal" action="produire_facture.php" method="post" enctype="multipart/form-data" >               
@@ -84,10 +84,5 @@ if (!isset($_SESSION['user'])) {
                 </div>
             </form>           
         </section>
-
-        <footer>
-            <p> TP1 INF3005 </p>
-        </footer>
-
     </body>
 </html>

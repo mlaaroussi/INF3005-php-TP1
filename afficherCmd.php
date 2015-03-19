@@ -28,15 +28,15 @@ $adresse = $data['adresse'];
 
     <body>
         <div>
-            <header>
-                <h1>Composition et achat de cadres pour les photos en ligne</h1>
+            <div id="header">
+                <div id="titre"> Composition et achat de cadres pour les photos en ligne</div>
                 <ul>
-                    <li><a href="accueil.php">Menu principal</a></li>                    
-                    <li><a href="quitter.php">Quitter</a></li>
-                </ul>
-            </header>           
+                    <li><a href="accueil.php">Menu principal</a></li>
+                    <li ><a href="quitter.php">Quitter </a> [ <?php echo $_SESSION['login'] ?> ]</li>
+                </ul> 
+            </div>          
             <table>
-                <caption> <h2>Liste ses commades effectuées:</h2></caption> 
+                <caption> <h2>Liste des commades effectuées:</h2></caption> 
                 <tr>                        
                     <th colspan="5">Dimensions du cadre (en cm)</th>
                     <th colspan="4">Couleurs des côtés du cadre</th>
@@ -71,8 +71,8 @@ $adresse = $data['adresse'];
                     echo "<td> <span style = 'color:" . $data['couleur_droite'] . "'> " . $data['couleur_droite'] . "</span></td>";
                     echo "<td>" . $data['materiel'] . "</td>";
                     echo "<td> <img src='upload/" . $data['img_fichier'] . "' width='64' height='64'/> </td>";
-                     echo "<td width='15%'>".date('d/m/Y à H\hi',strtotime($data['date_commande']))." </td>";
-                     echo "<td width='15%'>".date('d/m/Y à H\hi',strtotime($data['date_livraison']))." </td>";         
+                    echo "<td width='15%'>" . date('d/m/Y à H\hi', strtotime($data['date_commande'])) . " </td>";
+                    echo "<td width='15%'>" . date('d/m/Y à H\hi', strtotime($data['date_livraison'])) . " </td>";
                     echo "</tr>";
                 }
                 mysql_close();

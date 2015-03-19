@@ -1,7 +1,7 @@
 /**
  * @author Mohamed LAAROUSSI, LAAM03038304
  */
-var long = 320;
+var long = 250;
 var haut = 250;
 var lcadre = 20;
 var marge = 30;
@@ -10,7 +10,7 @@ var couleurHaut = "#ED1A59";
 var couleurBas = "#ED1A59";
 var couleurGauche = "#ED1A59";
 var couleurDroit = "#ED1A59";
-var imgSrc = "img/no-image.jpg";
+var imgSrc = "img/noimage.png";
 
 $(document).ready(function (e) {
     dessinerCadre();
@@ -79,9 +79,8 @@ $(document).ready(function (e) {
             var type = fichier.type;
             var typesAcceptes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
             if (type !== typesAcceptes[0] && type !== typesAcceptes[1] && type !== typesAcceptes[2] && type !== typesAcceptes[3]) {
-                imgSrc = "img/no-image.jpg";
-                //$('#imgRslt1').attr('src', 'img/no-image.jpg');
-                $("#message").html("<span id='erreur'> Veuillez choisir une image valide, Seulement les types JPEG,JPG et PNG sont permis</span>");
+                imgSrc = "img/noimage.png";
+                $("#message").html("<span id='erreur'> Veuillez choisir une image valide, Seulement les types JPEG,JPG,GIF et PNG sont permis</span>");
                 return false;
             } else {
                 var reader = new FileReader();
@@ -96,7 +95,7 @@ $(document).ready(function (e) {
 
 function imageIsLoaded(e) {
     $("#fichierImg").css("color", "green");
-    //$('#imgRslt').attr('src', e.target.result);
+   
     imgSrc = e.target.result;
     dessinerCadre();
 }
