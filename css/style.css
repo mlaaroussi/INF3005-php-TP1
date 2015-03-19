@@ -209,7 +209,8 @@ input[type="tel"],input[type="email"],textarea{
 }
 
 #ht,#lr,#pf,#lCadre,#marge {    
-    width: 40px;	        
+    width: 40px;
+    margin-left: 30px;
 }
 
 input[type="submit"], input[type="reset"]{
@@ -221,6 +222,25 @@ input[type="submit"], input[type="reset"]{
 
 input[type="submit"]:hover,input[type="reset"]:hover {
     background-color: #9999ff;
+}
+
+input[type="range"] {
+    position: relative;
+    margin-left: 1em;
+}
+input[type="range"]:after,
+input[type="range"]:before {
+    position: absolute;
+    top: 15px;
+    color: #aaa;
+}
+input[type="range"]:before {
+    left: -10px;
+    content: attr(min);
+}
+input[type="range"]:after {
+    right: -20px;
+    content: attr(max);
 }
 
 #success {

@@ -33,24 +33,24 @@ if (!isset($_SESSION['user'])) {
                         <input type="file" name="fichierImg" id="fichierImg" accept="image/*" required />                                 
                         <h2>2.Adapter votre choix :</h2>                                           
                         <h3>Dimensions :</h3>
-                        <label class="normal" for="rangeH" >Hauteur: <span class="normal">(max. 100cm)</span> </label> 
-                        <input type="range" id="rangeH" value="50">
+                        <label class="normal" for="rangeH" >Hauteur: <span class="normal">(en cm)</span> </label> 
+                        <input type="range" id="rangeH" value="50" max="150" min="25" step="5">
                         <input type="text" name="hauteur" id="ht" value="50" readonly>
                         <br/>
-                        <label class="normal" for="rangeL" >Largeur: <span class="normal">(max. 100cm)</span> </label> 
-                        <input type="range" id="rangeL" value="50">
+                        <label class="normal" for="rangeL" >Largeur: <span class="normal">(en cm)</span> </label> 
+                        <input type="range" id="rangeL" value="50"  max="150" min="25" step="5">
                         <input type="text" name="largeur" id="lr" value="50" readonly>
                         <br/>
-                        <label class="normal" for="rangeP" >Profondeur: <span class="normal">(max. 5cm)</span> </label>
-                        <input type="range" id="rangeP" value="40">
+                        <label class="normal" for="rangeP" >Profondeur: <span class="normal">(en cm)</span> </label>
+                        <input type="range" id="rangeP" value="2" max="5" min="1" step="1">
                         <input type="text" name="profondeur" id="pf" value="2" readonly> 
                         <br/>
-                        <label class="normal" for="rangeLc" >Largeur cadre: <span class="normal">(max. 10cm)</span> </label>
-                        <input type="range" id="rangeLc" value="40">
+                        <label class="normal" for="rangeLc" >Largeur cadre: <span class="normal">(en cm)</span> </label>
+                        <input type="range" id="rangeLc" value="5" max="10" min="1" step="1">
                         <input type="text" name="lCadre" id="lCadre" value="5" readonly>
                         <br/>
-                        <label class="normal" for="rangeMr" >Marge: <span class="normal">(max. 10cm)</span> </label>
-                        <input type="range" id="rangeMr" value="40">
+                        <label class="normal" for="rangeMr" >Marge: <span class="normal">(en cm)</span> </label>
+                        <input type="range" id="rangeMr" value="5" max="20" min="1" step="1">
                         <input type="text" name="marge" id="marge" value="5" readonly>                       
 
                         <h3>Couleurs des cotés du cadre:</h3>

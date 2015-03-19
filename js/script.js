@@ -21,8 +21,8 @@ $(document).ready(function (e) {
    
     $("#rangeH").on("input", function () {
         //changer hauteur
-        $("#ht").val($("#rangeH").val());        
-        haut = $("#rangeH").val() * 5;
+        $("#ht").val($("#rangeH").val());             
+         haut = $("#rangeH").val() * 3;
         dessinerCadre();
 
     });
@@ -30,26 +30,26 @@ $(document).ready(function (e) {
     $("#rangeL").on("input", function () {
         //changer largeur
         $("#lr").val($("#rangeL").val());       
-        long = $("#rangeL").val() * 5;
+        long = $("#rangeL").val() * 3;
         dessinerCadre();
     });
 
     $("#rangeP").on("input", function () {
-        $("#pf").val($("#rangeP").val() / 20);
-        profond = $("#rangeP").val() / 4;
+        $("#pf").val($("#rangeP").val());
+        profond = $("#rangeP").val() * 3;
         dessinerCadre();
     });
 
 
     $("#rangeLc").on("input", function () {
-        $("#lCadre").val($("#rangeLc").val() / 10);
-        lcadre = $("#rangeLc").val() / 2;
+        $("#lCadre").val($("#rangeLc").val());
+        lcadre = $("#rangeLc").val()*3;
         dessinerCadre();
     });
 
     $("#rangeMr").on("input", function () {
-        $("#marge").val($("#rangeMr").val() / 10);
-        marge = $("#rangeMr").val() / 2;
+        $("#marge").val($("#rangeMr").val());
+        marge = $("#rangeMr").val() * 3;
         dessinerCadre();
     });
 
