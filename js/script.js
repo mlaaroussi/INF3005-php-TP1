@@ -15,21 +15,21 @@ var imgSrc = "img/noimage.png";
 $(document).ready(function (e) {
     dessinerCadre();
 
-    $("#formPrincipal").submit(function () {        
-        canvasNoirEtBlanc();        
+    $("#formPrincipal").submit(function () {
+        canvasNoirEtBlanc();
     });
-   
+
     $("#rangeH").on("input", function () {
         //changer hauteur
-        $("#ht").val($("#rangeH").val());             
-         haut = $("#rangeH").val() * 3;
+        $("#ht").val($("#rangeH").val());
+        haut = $("#rangeH").val() * 3;
         dessinerCadre();
 
     });
 
     $("#rangeL").on("input", function () {
         //changer largeur
-        $("#lr").val($("#rangeL").val());       
+        $("#lr").val($("#rangeL").val());
         long = $("#rangeL").val() * 3;
         dessinerCadre();
     });
@@ -43,7 +43,7 @@ $(document).ready(function (e) {
 
     $("#rangeLc").on("input", function () {
         $("#lCadre").val($("#rangeLc").val());
-        lcadre = $("#rangeLc").val()*3;
+        lcadre = $("#rangeLc").val() * 3;
         dessinerCadre();
     });
 
@@ -95,7 +95,7 @@ $(document).ready(function (e) {
 
 function imageIsLoaded(e) {
     $("#fichierImg").css("color", "green");
-   
+
     imgSrc = e.target.result;
     dessinerCadre();
 }
@@ -206,8 +206,12 @@ function dessinerCadre() {
 function canvasNoirEtBlanc() {
     var canvas = $("#canvasRslt")[0];
     var ctx = canvas.getContext("2d");
-    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+    var canvasNB = $("#canvasNoireBlanc")[0];
+    var ctx2 = canvasNB.getContext("2d");
     
+    var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
     //Transformation grayScale
     var pixels = imgData.data;
     for (var i = 0, n = pixels.length; i < n; i += 4) {
@@ -216,11 +220,13 @@ function canvasNoirEtBlanc() {
         pixels[i + 1] = grayscale;        // green
         pixels[i + 2] = grayscale;        // blue       
     }
+    canvasNB.width = canvas.width;
+    canvasNB.height = canvas.height;
     //on remet l'image en noir et blanc
-    ctx.putImageData(imgData, 0, 0);
-       
-    var canvasData = canvas.toDataURL("image/png");
-     //on remplit le champ caché par les données de l'image
+    ctx2.putImageData(imgData, 0, 0);
+
+    var canvasData = canvasNB.toDataURL("image/png");
+    //on remplit le champ caché par les données de l'image
     $("#imgData").val(canvasData);  
-    $("#lschema").val(canvas.width);
+    $("#lschema").val("width:"+canvasNB.width+"px;");
 }

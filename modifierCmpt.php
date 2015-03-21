@@ -23,6 +23,7 @@ $adresse = $data['adresse'];
 
 mysql_close();
 
+$affichage='';
 if(isset($_GET['msg'])){
     $msg =$_GET['msg'];
     if($msg=="existedeja"){

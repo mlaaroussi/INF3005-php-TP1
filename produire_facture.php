@@ -4,8 +4,10 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header("location:index.php");
 }
+//génerer unidentifiant unique
+$nomUnique = uniqid();
+$dossierSauvegarde = "../../upload/";
 //telechargement de l'image.
-$nomUnique = uniqid(); //génerer unidentifiant unique
 if (isset($_FILES["fichierImg"]["type"])) {
     $extensionsValides = array("jpeg", "jpg", "png", "gif");
     $temporary = explode(".", $_FILES["fichierImg"]["name"]);
@@ -18,7 +20,7 @@ if (isset($_FILES["fichierImg"]["type"])) {
         } else {
             $source = $_FILES['fichierImg']['tmp_name']; // variable pour stocker le chemin du fichier source
             $imgNom = "img_" . $nomUnique . "." . $extension;
-            $destination = "upload/" . $imgNom;
+            $destination = $dossierSauvegarde . $imgNom;
 
             move_uploaded_file($source, $destination); //déplacer le fichier vers $destination
             // echo "<span id='success'>Image téléchargée avec succès, (Nom du fichier : " . $_FILES["fichierImg"]["name"] . ")</span>";
@@ -32,14 +34,14 @@ $canvasData = $_POST['imgData'];
 $canvasData = substr($canvasData, strpos($canvasData, ",") + 1);
 $decodedData = base64_decode($canvasData);
 $canvasNom = "cnv_" . $nomUnique . ".png";
-$fp = fopen("upload/" . $canvasNom, 'wb');
+$fp = fopen($dossierSauvegarde . $canvasNom, 'wb');
 fwrite($fp, $decodedData);
 fclose($fp);
 
-//$cheminCanv = "upload/" . $canvasNom;
 //Produire le message de la facture et envoi d'email  
 //date de livraison = date d'aujourd'hui plus 3 jours
 setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+$dateFacture = ucwords((strftime("%A %e %B à %H h %M")));
 $dateLivraison = mktime(10, 0, 0, date("m"), date("d") + 3, date("Y"));
 $strDateLivraison = ucwords((strftime("%A %e %B à %H h %M", $dateLivraison)));
 ?>
@@ -59,12 +61,14 @@ $strDateLivraison = ucwords((strftime("%A %e %B à %H h %M", $dateLivraison)));
             </ul> 
         </div> 
         <section>           
-<?php
-$msgEmailEnvoye = '';
-$cheminMoka = "http://moka.labunix.uqam.ca/~ch791163/PHP/Tp1_php/upload/" . $canvasNom;
-//message de l'email
-$messageFacture = '        
+            <?php
+            $msgEmailEnvoye = '';
+            $cheminMoka = "http://moka.labunix.uqam.ca/~ch791163/upload/" . $canvasNom;
+
+            //message de l'email
+            $messageFacture = '        
             <h2> Facture %msgEmailEnvoye%</h2>
+            <h3>Date de Facture: <span style="color: #464646;">' . $dateFacture . ' </span> </h3>
             <h3>Date de livraison: <span style="color: #464646;">' . $strDateLivraison . ' </span> </h3>
             <div id="facture">    
                 <div id="criteres">                
@@ -90,36 +94,36 @@ $messageFacture = '
                 </div>  
                 <div id="apercue">
                     <h3>Schéma en noir et blanc de l\'encadrement</h3>
-                    <div id="schema" style=\'width:' . $_POST["lschema"] . 'px;\'>                    
+                    <div id="schema" style=\'' . $_POST["lschema"] . '\'>                    
                         <img src= "%srcImg%" >    
                     </div>
                 </div>                
             </div>';
-$message = str_replace('%msgEmailEnvoye%', '', $messageFacture);
-$message = str_replace('%srcImg%', $cheminMoka, $message);
-$msgFacure = "<html><body>" . $message . "</body></html>";
+            $message = str_replace('%msgEmailEnvoye%', '', $messageFacture);
+            $message = str_replace('%srcImg%', $cheminMoka, $message);
+            $msgFacure = "<html><body>" . $message . "</body></html>";
 //Les entetes du courriel
-$headers = "From: TP1-INF3005\r\n";
-$headers .= "Content-type: text/html";
+            $headers = "From: TP1-INF3005\r\n";
+            $headers .= "Content-type: text/html";
 
 //On envoit la facture sous forme html
-if (mail($_SESSION['email'], 'Facture', $msgFacure, $headers)) {
-    $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#success'> (Envoyée avec succès par email)</span>", $messageFacture);
-    $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
-} else {
-    $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#erreur'> (Problème d'envoi par email) </span>", $messageFacture);
-    $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
-}
+            if (mail($_SESSION['email'], 'Facture', $msgFacure, $headers)) {
+                $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#success'> (Envoyée avec succès à votre courriel " . $_SESSION['email'] . ")</span>", $messageFacture);
+                $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
+            } else {
+                $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#erreur'> (Problème d'envoi par email) </span>", $messageFacture);
+                $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
+            }
 //On affiche la facture
-echo $messageFacture;
+            echo $messageFacture;
 //enregistrer la commade dans la base
-include('connexion.php');
-$sql = "insert into $tbl_commande (id_user,hauteur,profondeur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
-$sql.=" values (" . $_SESSION['user'] . "," . $_POST["hauteur"] . "," . $_POST["largeur"] . "," . $_POST["profondeur"] . "," . $_POST["lCadre"] . "," . $_POST["marge"] . ",'" . $_POST["coulHaut"] . "','" . $_POST["coulBas"] . "','" . $_POST["coulGauche"] . "','" . $_POST["coulDroite"] . "','" . $_POST["type"] . "','" . $imgNom . "',now(),'" . date("Y-m-d H:i:s", $dateLivraison) . "')";
+            include('connexion.php');
+            $sql = "insert into $tbl_commande (id_user,hauteur,profondeur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
+            $sql.=" values (" . $_SESSION['user'] . "," . $_POST["hauteur"] . "," . $_POST["largeur"] . "," . $_POST["profondeur"] . "," . $_POST["lCadre"] . "," . $_POST["marge"] . ",'" . $_POST["coulHaut"] . "','" . $_POST["coulBas"] . "','" . $_POST["coulGauche"] . "','" . $_POST["coulDroite"] . "','" . $_POST["type"] . "','" . $imgNom . "',now(),'" . date("Y-m-d H:i:s", $dateLivraison) . "')";
 
-mysql_query($sql);
-mysql_close();
-?>
+            mysql_query($sql);
+            mysql_close();
+            ?>
         </section>
     </body>
 </html>

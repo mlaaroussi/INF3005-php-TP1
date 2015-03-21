@@ -80,10 +80,10 @@ if (!isset($_SESSION['user'])) {
                         <canvas id="canvasRslt"  >
                             Votre navigateur ne supporte pas Canvas 
                         </canvas>
-                        <canvas id="canvasNoireBlanc"  >
+                        <canvas id="canvasNoireBlanc">
                             Votre navigateur ne supporte pas Canvas 
                         </canvas>
-                        
+
                     </div>
                 </div>
             </form>           

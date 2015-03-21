@@ -16,7 +16,7 @@ $rslt = mysql_query($sql);
     <head>
         <meta charset="utf-8">					
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <title>Modifier commande</title>         
+        <title>Afficher commande</title>         
     </head>
 
     <body>
@@ -63,7 +63,7 @@ $rslt = mysql_query($sql);
                     echo "<td> <span style = 'color:" . $data['couleur_gauche'] . "'> " . $data['couleur_gauche'] . "</span></td>";
                     echo "<td> <span style = 'color:" . $data['couleur_droite'] . "'> " . $data['couleur_droite'] . "</span></td>";
                     echo "<td>" . $data['materiel'] . "</td>";
-                    echo "<td> <img src='upload/" . $data['img_fichier'] . "' width='64' height='64'/> </td>";
+                    echo "<td> <img src='../../upload/" . $data['img_fichier'] . "' width='64' height='64' alt='". $data['img_fichier'] ."'/> </td>";
                     echo "<td width='15%'>" . date('d/m/Y à H\hi', strtotime($data['date_commande'])) . " </td>";
                     echo "<td width='15%'>" . date('d/m/Y à H\hi', strtotime($data['date_livraison'])) . " </td>";
                     echo "</tr>";

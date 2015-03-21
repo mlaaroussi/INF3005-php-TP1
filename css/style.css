@@ -261,15 +261,14 @@ input[type="range"]:after {
 
 #apercue{
     position: absolute;
+    padding: 5px;
     border:1px solid grey;
     width: 600px;
     margin-left: 30%;
 }
 
-#schema{
-    /* border:1px solid grey;*/
-    width: 300px;   
-    margin: 20px auto;
+#schema{  
+    margin: auto;
 }
 
 #nvCmd {
@@ -322,4 +321,4 @@ tr td {
 
 #canvasNoireBlanc{
     display: none;
-}
+} 
