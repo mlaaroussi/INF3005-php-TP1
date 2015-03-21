@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header("location:index.php");
 }
+$affichage='';
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
     if ($msg == "cmptok") {

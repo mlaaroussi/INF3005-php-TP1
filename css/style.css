@@ -319,3 +319,7 @@ tr td {
     border-width: 1px;
     padding: 5px;
 }
+
+#canvasNoireBlanc{
+    display: none;
+}

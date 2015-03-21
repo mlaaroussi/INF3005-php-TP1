@@ -10,13 +10,6 @@ $idUser = $_SESSION['user'];
 $sql = "SELECT * FROM $tbl_commande WHERE id_user = $idUser";
 $rslt = mysql_query($sql);
 
-$nom = $data['nom'];
-$prenom = $data['prenom'];
-$usager = $data['usager'];
-$pass = $data['pass'];
-$tel = $data['tel'];
-$courriel = $data['courriel'];
-$adresse = $data['adresse'];
 ?>
 <!DOCTYPE html>
 <html>

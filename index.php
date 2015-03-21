@@ -1,5 +1,6 @@
 <?php
 
+$affichage='';
 if(isset($_GET['msg'])){
     $msg =$_GET['msg'];
     if($msg=="ajoutok"){

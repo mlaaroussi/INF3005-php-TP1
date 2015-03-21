@@ -1,9 +1,8 @@
 <?php
-
 //Vérification de session
 session_start();
 if (!isset($_SESSION['user'])) {
-     header("location:index.php");
+    header("location:index.php");
 }
 //telechargement de l'image.
 $nomUnique = uniqid(); //génerer unidentifiant unique
@@ -36,16 +35,14 @@ $canvasNom = "cnv_" . $nomUnique . ".png";
 $fp = fopen("upload/" . $canvasNom, 'wb');
 fwrite($fp, $decodedData);
 fclose($fp);
-//$cheminCanv="http://moka.labunix.uqam.ca/~ch791163/PHP/Tp1_php/upload/".$canvasNom;
-$cheminCanv = "upload/" . $canvasNom;
 
+//$cheminCanv = "upload/" . $canvasNom;
 //Produire le message de la facture et envoi d'email  
 //date de livraison = date d'aujourd'hui plus 3 jours
 setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
 $dateLivraison = mktime(10, 0, 0, date("m"), date("d") + 3, date("Y"));
 $strDateLivraison = ucwords((strftime("%A %e %B à %H h %M", $dateLivraison)));
-//message de l'email
-$message = '
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -54,19 +51,23 @@ $message = '
         <link href="css/style.css" rel="stylesheet" type="text/css"/>       
     </head>
     <body>
-         <div id="header">
+        <div id="header">
             <div id="titre"> Composition et achat de cadres pour les photos en ligne</div>
-                <ul>
-                    <li><a href="accueil.php">Menu principal</a></li>
-                    <li ><a href="quitter.php">Quitter </a> [ '. $_SESSION['login'].' ]</li>
-                </ul> 
-            </div> 
-        <section>
-            <h2> Facture </h2>
+            <ul>
+                <li><a href="accueil.php">Menu principal</a></li>
+                <li ><a href="quitter.php">Quitter </a> [ <?php echo $_SESSION['login'] ?> ]</li>
+            </ul> 
+        </div> 
+        <section>           
+<?php
+$msgEmailEnvoye = '';
+$cheminMoka = "http://moka.labunix.uqam.ca/~ch791163/PHP/Tp1_php/upload/" . $canvasNom;
+//message de l'email
+$messageFacture = '        
+            <h2> Facture %msgEmailEnvoye%</h2>
             <h3>Date de livraison: <span style="color: #464646;">' . $strDateLivraison . ' </span> </h3>
             <div id="facture">    
-                <div id="criteres">
-                
+                <div id="criteres">                
                     <h3>Dimensions :</h3>
                     <ul>
                         <li>Hauteur:' . $_POST["hauteur"] . ' </li>
@@ -75,41 +76,42 @@ $message = '
                         <li>Largeur cadre: ' . $_POST["lCadre"] . 'cm </li>
                         <li>Marge: ' . $_POST["marge"] . 'cm</li>         
                     </ul>
-
                     <h3>Couleurs des cotés du cadre:</h3>
                      <ul>
                         <li>Haut:<span style = "font-weight: bolder;color:' . $_POST["coulHaut"] . '">' . $_POST["coulHaut"] . '</span> </li>
                         <li>Bas:<span style = "font-weight: bolder;color:' . $_POST["coulBas"] . '"> ' . $_POST["coulBas"] . '</span></li>
                         <li>Gauche:<span style = "font-weight: bolder;color:' . $_POST["coulGauche"] . '">' . $_POST["coulGauche"] . '</span></li>
                         <li>Droite:<span style = "font-weight: bolder;color:' . $_POST["coulDroite"] . '">' . $_POST["coulDroite"] . '</span></li>         
-                    </ul>
-                    
+                    </ul>                    
                     <h3>Matériel du cadre:</h3>
                     <ul>
                         <li>' . $_POST["type"] . '</li>
-                    </ul>
-                    
+                    </ul>                    
                 </div>  
                 <div id="apercue">
                     <h3>Schéma en noir et blanc de l\'encadrement</h3>
                     <div id="schema" style=\'width:' . $_POST["lschema"] . 'px;\'>                    
-                        <img src= "' . $cheminCanv . '" >    
+                        <img src= "%srcImg%" >    
                     </div>
                 </div>                
-            </div>             
-        </section>
-    </body>
-</html>';
+            </div>';
+$message = str_replace('%msgEmailEnvoye%', '', $messageFacture);
+$message = str_replace('%srcImg%', $cheminMoka, $message);
+$msgFacure = "<html><body>" . $message . "</body></html>";
 //Les entetes du courriel
 $headers = "From: TP1-INF3005\r\n";
 $headers .= "Content-type: text/html";
-//envoi du courriel en format html
-if (mail('molaaroussi@gmail.com', 'Facture', $message, $headers)) {
-//if (mail($_SESSION['email'], 'Facture', $message, $headers)) {
-    echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#success'> (Envoyée avec succès par email)</span> </h2>", $message);
+
+//On envoit la facture sous forme html
+if (mail($_SESSION['email'], 'Facture', $msgFacure, $headers)) {
+    $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#success'> (Envoyée avec succès par email)</span>", $messageFacture);
+    $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
 } else {
-    echo str_replace("<h2> Facture </h2>", "<h2> Facture <span id='#erreur'>  (Problème d'envoi par email) </span>  </h2>", $message);
+    $messageFacture = str_replace('%msgEmailEnvoye%', "<span id='#erreur'> (Problème d'envoi par email) </span>", $messageFacture);
+    $messageFacture = str_replace('%srcImg%', $_POST['imgData'], $messageFacture);
 }
+//On affiche la facture
+echo $messageFacture;
 //enregistrer la commade dans la base
 include('connexion.php');
 $sql = "insert into $tbl_commande (id_user,hauteur,profondeur,largeur,lrg_cadre,lrg_marge,couleur_haut,couleur_bas,couleur_gauche,couleur_droite,materiel,img_fichier,date_commande,date_livraison)";
@@ -117,5 +119,10 @@ $sql.=" values (" . $_SESSION['user'] . "," . $_POST["hauteur"] . "," . $_POST["
 
 mysql_query($sql);
 mysql_close();
+?>
+        </section>
+    </body>
+</html>
+
 
 
