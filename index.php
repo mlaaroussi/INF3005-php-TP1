@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if (isset($_SESSION['user'])) {
+    header("location:accueil.php");
+}
 $affichage='';
 if(isset($_GET['msg'])){
     $msg =$_GET['msg'];
@@ -9,6 +12,8 @@ if(isset($_GET['msg'])){
 } else {
     $affichage="Authentification";
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
