@@ -1,6 +1,9 @@
-/**
- * @author Mohamed LAAROUSSI, LAAM03038304
- */
+/*  Cours INF3005 TP 1
+    Created on : 2015-03-05, 22:32:50 
+    Mohamed LAAROUSSI, LAAM03038304
+    Nabil Harzallah, HARM13037400
+    Nizar Semlali, SEMN14019103
+*/
 var long = 250;
 var haut = 250;
 var lcadre = 20;
