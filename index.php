@@ -1,4 +1,5 @@
 <?php
+//Si on est deja logé on se redirrige vers accueil.php
 session_start();
 if (isset($_SESSION['user'])) {
     header("location:accueil.php");
