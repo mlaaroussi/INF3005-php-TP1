@@ -71,10 +71,10 @@ if(isset($_GET['msg'])){
                 <input name="usager" type="text" required value="<?php echo $usager ?>"/><br />
 
                 <label class="normal" for="pass">Créez un mot de passe:</label><br />
-                <input name="pass" type="password" required  value="<?php echo $password ?>"/><br />
+                <input name="pass" type="password" required  value="<?php echo $pass ?>"/><br />
 
                 <label class="normal" for="confirmPass">Confirmez votre mot de passe:</label><br />
-                <input name="confirmPass" type="password" required  value="<?php echo $password ?>"/><br />
+                <input name="confirmPass" type="password" required  value="<?php echo $pass ?>"/><br />
 
                 <label class="normal" for="tel">Téléphone:</label><br />
                 <input name="tel" type="tel" required  value="<?php echo $tel ?>" /><br />
